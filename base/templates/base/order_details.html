@@ -20,6 +20,7 @@
                 <h4 class="card-title">Order Details</h4>
                 <div>
                     <a type="button" class="btn light btn-dark" href="{{request.META.HTTP_REFERER}}">Back</a>
+                    <a type="button" class="btn btn-success"  href="{% url 'order_item_create' order.id %}">Add A New Order </a>
                 </div>
             </div>
             <div class="card-body">
@@ -30,11 +31,11 @@
                         <div class="media-body">
                             <h4 class="my-0 text-black">Place Order : {{ order.place_order }} </h4>
                             <strong>Order ID: {{ order.id }}</strong>
-                            {% if order.customer == 'Delivery' %}
+                            <!-- {% if order.customer == 'Delivery' %}
                             <strong>{{ order.customer.name }}</strong>
                                 {% else %}
                             <strong>{{ order.table }} </strong>
-                            {% endif %}
+                            {% endif %} -->
                            
                             
                         </div>
@@ -92,7 +93,6 @@
                                 <h4 class="my-0 text-secondary font-w600">${{ orderitem.get_total }}</h4>
                             </td>
                             <td>
-                                
                                 <a type="button" class="btn light btn-info mr-1"  href="">Edit </a>
                                 <a type="button" class="btn light btn-danger"  href="">Delete</a> 
                             </td>

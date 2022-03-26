@@ -85,3 +85,14 @@ class OrderForm(ModelForm):
         model = Order
         fields = '__all__'
 
+class OrderItemForm(ModelForm):
+
+    class Meta:
+        model = OrderItem
+        fields = '__all__'
+
+class ReservationForm(ModelForm):
+   
+    class Meta:
+        model = Reservation
+        fields = '__all__'

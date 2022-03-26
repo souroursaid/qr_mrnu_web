@@ -1,0 +1,72 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="content-body">
+    <div class="container-fluid">
+        <div class ="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Share QR Code</h4>
+                    <div>
+                        <a type="button" class="btn light btn-dark" href="{{request.META.HTTP_REFERER}}">Back</a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h1 style="text-align:center" class="mb-4">Share your QR Menu Code</h1>
+                    <div class="row">
+                        <div class="m-1">
+                            <button type="button" class="btn btn-rounded btn-outline-light">
+                            <img src="https://img.icons8.com/fluency/48/000000/facebook-messenger--v2.png"/> 
+                                <strong class="ml-2"> Messenger </strong>    
+                            </button>
+                        </div>
+                        <div class="m-1">
+                            <button type="button" class="btn btn-rounded btn-outline-light">
+                                <img src="https://img.icons8.com/fluency/48/000000/facebook-new.png"/> 
+                                <strong class="ml-2"> Facebook </strong>    
+                            </button>
+                        </div>
+                        <div class="m-1">
+                            <button type="button" class="btn btn-rounded btn-outline-light">
+                                <img src="https://img.icons8.com/fluency/48/000000/gmail-new.png"/>   
+                                 <strong class="ml-2"> Email </strong>    
+                            </button>
+                        </div>
+                        <div class="m-1">
+                            <button type="button" class="btn btn-rounded btn-outline-light">
+                                <img src="https://img.icons8.com/fluency/48/000000/whatsapp.png"/> 
+                                <strong class="ml-2"> WhatsApp </strong>    
+                            </button>
+                        </div>
+                        <div class="m-1">
+                            <button type="button" class="btn btn-rounded btn-outline-light">
+                                <img src="https://img.icons8.com/fluency/48/000000/instagram-new.png"/>
+                                <strong class="ml-2"> Instagram </strong>    
+                            </button>
+                        </div>
+                        <div class="m-1">
+                            <button type="button" class="btn btn-rounded btn-outline-light">
+                                <img src="https://img.icons8.com/fluency/48/000000/twitter.png"/>    
+                                 <strong class="ml-2"> Twitter </strong>    
+                            </button>
+                        </div>
+
+ 
+                    </div>
+                    <div class="row">
+                        <img src="{% static 'images/qr.jpg' %}" alt="qr here" width="200" height="200"  >
+                        
+
+                    </div>
+                    <button type="button" class="btn btn-rounded btn-dark"> Download </button>
+                </div>
+
+            </div>
+        </div>
+        </div>
+
+    </div>
+</div>
+{% endblock content %}
