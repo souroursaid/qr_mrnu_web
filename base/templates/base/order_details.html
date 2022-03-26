@@ -1,0 +1,114 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+<div class="content-body">
+    <div class="container-fluid">
+        
+        {% for message in messages %}
+        <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          {{ message }}
+        </div>
+      {% endfor %}
+      {% for order in orders %}
+      <div class="row">
+      <div class="col-xl-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Order Details</h4>
+                <div>
+                    <a type="button" class="btn light btn-dark" href="{{request.META.HTTP_REFERER}}">Back</a>
+                </div>
+            </div>
+            <div class="card-body">
+                
+                <div class="row mx-0">
+                    <div class="media align-items-center col-md-4 col-lg-6 px-0 mb-3 mb-md-0">
+                      
+                        <div class="media-body">
+                            <h4 class="my-0 text-black">Place Order : {{ order.place_order }} </h4>
+                            <strong>Order ID: {{ order.id }}</strong>
+                            {% if order.customer == 'Delivery' %}
+                            <strong>{{ order.customer.name }}</strong>
+                                {% else %}
+                            <strong>{{ order.table }} </strong>
+                            {% endif %}
+                           
+                            
+                        </div>
+                    </div>
+                    <div class="iconbox col-md-4 col-lg-3 mb-3 mb-md-0">
+                        <h4>Total</h4>
+                        <strong>{{ order.get_cart_total }}</strong>
+                    </div>
+                    <div class="iconbox col-md-4 col-lg-3 mb-md-0">
+                        <h4>Total Items</h4>
+                        <strong>{{ order.get_cart_items }}</strong>
+                        
+                    </div>
+                   
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-body pt-2">
+                <div class="table-responsive ">
+                    <table class="table items-table">
+                        
+                        <tr>
+                            <th class="my-0 text-black font-w500 fs-20">Items</th>
+                            <th style="width:10%;" class="my-0 text-black font-w500 fs-20">Qty</th>
+                            <th style="width:10%;" class="my-0 text-black font-w500 fs-20">Price</th>
+                            <th class="my-0 text-black font-w500 fs-20">Total Price</th>
+                            <th class="my-0 text-black font-w500 fs-20">Actions</th>
+                        </tr>
+                        {% for orderitem in orderitems %}
+                        <tr>
+                            <td>
+                                <div class="media">
+                                    <img class="mr-3 img-fluid rounded" width="85" src="{{ orderitem.menu.imageURL }}" alt="image here">
+                                    <div class="media-body">
+                                        <h5 class="mt-0 mb-2 text-black mb-4">{{ orderitem.menu.name }}</h5>
+ 
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <h4 class="my-0 text-secondary font-w600">X {{ orderitem.quantity }}</h4>
+                            </td>
+                            <td>
+                                <h4 class="my-0 text-secondary font-w600">${{ orderitem.menu.price }}</h4>
+                            </td>
+                            <td>
+                                <h4 class="my-0 text-secondary font-w600">${{ orderitem.get_total }}</h4>
+                            </td>
+                            <td>
+                                
+                                <a type="button" class="btn light btn-info mr-1"  href="">Edit </a>
+                                <a type="button" class="btn light btn-danger"  href="">Delete</a> 
+                            </td>
+                        </tr>
+                        {%endfor %}
+                    </table>
+                </div>	
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endfor %}
+
+    </div>
+</div>
+
+{% endblock content %}

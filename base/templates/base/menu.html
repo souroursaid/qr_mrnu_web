@@ -1,0 +1,73 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+<div class="content-body">
+    <div class="container-fluid">
+        {% for message in messages %}
+        <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          {{ message }}
+        </div>
+      {% endfor %}
+        <div class ="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Menu</h4>
+                    <div>
+                        <button type="button" class="btn light btn-dark">Back</button>
+                        <a type="button" class="btn btn-success"  href="{% url 'menu_create' %}">Add A New Menu Item </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-responsive-md">
+                        <thead>
+                            <tr>
+                                <th><strong>Category </strong></th>
+                                <th><strong>Item</strong></th>
+                                <th><strong>Price</strong></th>
+                                <th><strong>Image</strong></th>
+                                <th><strong>Description</strong></th>
+                                <th><strong>Action</strong></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for menu in menus %}
+                            <tr>
+                                <td>{{ menu.category }}</td>
+                                <td>{{ menu.name }}</td>
+                                <td>{{ menu.price }} DT</td>
+                                {% if menu.image %}
+                                <td><img src="{{ menu.imageURL }}" alt="image here" style="max-height:50px"> </td>
+
+
+
+                                {% else %}
+                                <td>None</td>
+                                {% endif %}
+                                <td>{{ menu.description|truncatechars:15 }} </td>
+                                <td>
+                                    <a type="button" class="btn light btn-info" href="{% url 'menu_update' menu.id %}" >Edit</a>
+
+                                    <a type="button" class="btn light btn-danger"  href="{% url 'menu_delete' menu.id %} ">Delete</a> 
+                                </td>
+                            </tr>
+                            {% endfor %}
+
+
+                        </tbody>
+                    </table>
+                    
+                </div>
+            </div>
+        </div>
+        </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

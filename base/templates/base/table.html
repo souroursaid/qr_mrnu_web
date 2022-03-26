@@ -1,0 +1,74 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="content-body">
+    <div class="container-fluid">
+        
+        {% for message in messages %}
+        <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          {{ message }}
+        </div>
+      {% endfor %}
+
+        <div class ="row">
+        <div class="col-lg-12">
+            <div class="card">
+
+
+                <div class="card-header  mt-5">
+                    <h4 class="card-title">Table Management</h4>
+                    
+                    <div>
+                        <a type="button" class="btn light btn-dark" href="{{request.META.HTTP_REFERER}}">Back</a>
+                        <a type="button" class="btn btn-success"  href="{% url 'table_create' %}">Add A New Table </a>
+
+                       
+                    </div>
+
+                </div>
+                <div class="card-body">
+                <div class="table-responsive">
+                   
+                    <table class="table table-responsive-md">
+                        <thead>
+                            <tr>
+                                <th><strong>Table </strong></th>
+                                <th><strong>Size</strong></th>
+                                <th><strong>Action</strong></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for table in tables %}
+                            <tr>
+                                <td><strong >Table- {{ table.table_Number }}</strong></td>
+                                <td>{{ table.size }}</td>
+                                <td>
+                                    <button type="button" class="btn light btn-success" data-toggle="modal" data-target="#qr">QR Code</button>
+                                    <a type="button" class="btn light btn-info" href="{% url 'table_update' table.id %}" >Edit</a>
+                                    <a type="button" class="btn light btn-danger"  href="{% url 'table_delete' table.id %} ">Delete</a> 
+                                </td>
+                            </tr>
+                            {% endfor %}
+
+
+                        </tbody>
+                    </table>
+
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+        </div>
+
+
+    </div>
+</div>
+{% endblock content %}
