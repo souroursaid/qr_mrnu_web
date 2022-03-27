@@ -30,12 +30,13 @@
                       
                         <div class="media-body">
                             <h4 class="my-0 text-black">Place Order : {{ order.place_order }} </h4>
-                            <strong>Order ID: {{ order.id }}</strong>
-                            <!-- {% if order.customer == 'Delivery' %}
-                            <strong>{{ order.customer.name }}</strong>
+                            <strong class="mr-4">Order ID: {{ order.id }}</strong>
+                            {% if order.place_order == "Restaurant" %}
+                                <td>Table - {{ order.table.table_Number }}</td>
                                 {% else %}
-                            <strong>{{ order.table }} </strong>
-                            {% endif %} -->
+                                <td>{{ order.customer.name }}</td>
+                                {% endif%}
+
                            
                             
                         </div>

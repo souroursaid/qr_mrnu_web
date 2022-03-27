@@ -46,6 +46,32 @@
                             {% endfor %}
                         </tbody>
                     </table>
+                    <strong  style="color: black;"> Total Categories : {{ item_count }} </strong>
+                {% if categorys.has_other_pages %}
+                <nav class="ml-5 mt-3">
+                    <ul class="pagination pagination-gutter pagination-primary no-bg">
+                        {% if categorys.has_previous %}
+                        <li class="page-item page-indicator">
+                            <a class="page-link" href="?page={{ categorys.previous_page_number }}">
+                             <i class="la la-angle-left"></i></a>
+                        </li>
+                        {% endif %}
+                        {% for i in categorys.paginator.page_range %}
+                        {% if categorys.number == i %}
+                        <li class="page-item active "><a class="page-link">{{ i }}</a> </li>
+                        {% else %}
+                        <li class="page-item " ><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                        {% endif %}
+                        {% endfor %}
+                        {% if categorys.has_next %}
+                        <li class="page-item page-indicator">
+                            <a class="page-link" href="?page={{ categorys.next_page_number }}">
+                            <i class="la la-angle-right"></i></a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+                {% endif %}
 
 
 

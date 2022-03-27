@@ -1,21 +1,89 @@
 from django.shortcuts import redirect, render
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.db.models import Q
 from django.contrib import messages
 from django.forms import inlineformset_factory
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from .decorators import unauthenticated_user, allowed_users
 from .models import *
 from .forms import *
 # Create your views here.
 
 
+@unauthenticated_user
+def registrationPage(request):
+    form = CreateUserForm()
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            user = form.cleaned_data.get('username')
+            messages.success(request, 'Account was created for ' + user)
+
+            return redirect('login')
+
+    context = {'form': form}
+    return render(request, 'base/registration.html', context)
+
+
+@unauthenticated_user
+def loginPage(request):
+
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+        else:
+            messages.error(request, 'Username OR password is incorrect')
+
+    return render(request, 'base/login.html')
+
+
+def logoutPage(request):
+    logout(request)
+    return redirect('login')
+
+
+@login_required(login_url='login')
 def home(request):
     return render(request, 'base/home.html')
 
 
+@login_required(login_url='login')
+def profile(request):
+    return render(request, 'base/profile.html')
+
+
+@login_required(login_url='login')
 def category(request):
     categorys = Category.objects.all()
-    context = {'categorys': categorys}
+
+    if 'q' in request.GET:
+        q = request.GET['q']
+        categorys = Category.objects.filter(name__icontains=q)
+
+    item_count = categorys.count()
+
+    page = request.GET.get('page', 1)
+    paginator = Paginator(categorys, 4)
+    try:
+        categorys = paginator.page(page)
+    except PageNotAnInteger:
+        categorys = paginator.page(1)
+    except EmptyPage:
+        categorys = paginator.page(paginator.num_pages)
+
+    context = {'categorys': categorys, 'item_count': item_count}
     return render(request, 'base/category.html', context)
 
 
+@login_required(login_url='login')
 def createCategory(request):
     form = CategoryForm()
     if request.method == 'POST':
@@ -31,6 +99,7 @@ def createCategory(request):
     return render(request, 'base/forms/category_form.html', context)
 
 
+@login_required(login_url='login')
 def updateCategory(request, pk):
     category = Category.objects.get(id=pk)
     form = CategoryForm(instance=category)
@@ -47,6 +116,7 @@ def updateCategory(request, pk):
     return render(request, 'base/forms/category_form.html', context)
 
 
+@login_required(login_url='login')
 def deleteCategory(request, pk):
 
     category = Category.objects.get(id=pk)
@@ -60,13 +130,30 @@ def deleteCategory(request, pk):
     return render(request, 'base/forms/delete_category.html', context)
 
 
+@login_required(login_url='login')
 def table(request):
     tables = Table.objects.all()
 
-    context = {'tables': tables}
+    if 'q' in request.GET:
+        q = request.GET['q']
+        tables = Table.objects.filter(table_Number__icontains=q)
+
+    item_count = tables.count()
+
+    page = request.GET.get('page', 1)
+    paginator = Paginator(tables, 3)
+    try:
+        tables = paginator.page(page)
+    except PageNotAnInteger:
+        tables = paginator.page(1)
+    except EmptyPage:
+        tables = paginator.page(paginator.num_pages)
+
+    context = {'tables': tables, 'item_count': item_count}
     return render(request, 'base/table.html', context)
 
 
+@login_required(login_url='login')
 def createTable(request):
     form = TableForm()
     if request.method == 'POST':
@@ -82,6 +169,7 @@ def createTable(request):
     return render(request, 'base/forms/table_form.html', context)
 
 
+@login_required(login_url='login')
 def updateTable(request, pk):
     table = Table.objects.get(id=pk)
     form = TableForm(instance=table)
@@ -98,6 +186,7 @@ def updateTable(request, pk):
     return render(request, 'base/forms/table_form.html', context)
 
 
+@login_required(login_url='login')
 def deleteTable(request, pk):
     table = Table.objects.get(id=pk)
     if request.method == 'POST':
@@ -110,13 +199,30 @@ def deleteTable(request, pk):
     return render(request, 'base/forms/delete_table.html', context)
 
 
+@login_required(login_url='login')
 def menu(request):
     menus = Menu.objects.all()
 
-    context = {'menus': menus}
+    if 'q' in request.GET:
+        q = request.GET['q']
+        menus = Menu.objects.filter(name__icontains=q)
+
+    item_count = menus.count()
+
+    page = request.GET.get('page', 1)
+    paginator = Paginator(menus, 2)
+    try:
+        menus = paginator.page(page)
+    except PageNotAnInteger:
+        menus = paginator.page(1)
+    except EmptyPage:
+        menus = paginator.page(paginator.num_pages)
+
+    context = {'menus': menus, 'item_count': item_count}
     return render(request, 'base/menu.html', context)
 
 
+@login_required(login_url='login')
 def createMenu(request):
     form = MenuForm()
     if request.method == 'POST':
@@ -132,6 +238,7 @@ def createMenu(request):
     return render(request, 'base/forms/menu_form.html', context)
 
 
+@login_required(login_url='login')
 def updateMenu(request, pk):
     menu = Menu.objects.get(id=pk)
     form = MenuForm(instance=menu)
@@ -148,6 +255,7 @@ def updateMenu(request, pk):
     return render(request, 'base/forms/menu_form.html', context)
 
 
+@login_required(login_url='login')
 def deleteMenu(request, pk):
     menu = Menu.objects.get(id=pk)
     if request.method == 'POST':
@@ -160,13 +268,37 @@ def deleteMenu(request, pk):
     return render(request, 'base/forms/delete_menu.html', context)
 
 
+@login_required(login_url='login')
 def order(request):
     orders = Order.objects.all()
 
-    context = {'orders': orders}
+
+    if 'q' in request.GET:
+        q = request.GET['q']
+        orders = Order.objects.filter(
+
+            Q(place_order__icontains=q) |
+            Q(customer__name__icontains=q) |
+            Q(table__table_Number__icontains=q)
+        )
+
+    item_count = orders.count()
+
+    page = request.GET.get('page', 1)
+    paginator = Paginator(orders, 2)
+    try:
+        orders = paginator.page(page)
+    except PageNotAnInteger:
+        orders = paginator.page(1)
+    except EmptyPage:
+        orders = paginator.page(paginator.num_pages)
+
+ 
+    context = {'orders': orders,'item_count': item_count}
     return render(request, 'base/order.html', context)
 
 
+@login_required(login_url='login')
 def orderDetail(request, pk):
     orders = Order.objects.filter(id=pk)
 
@@ -176,6 +308,7 @@ def orderDetail(request, pk):
     return render(request, 'base/order_details.html', context)
 
 
+@login_required(login_url='login')
 def createOrderItem(request, pk):
     order = Order.objects.get(id=pk)
     OrderFormSet = inlineformset_factory(
@@ -193,6 +326,7 @@ def createOrderItem(request, pk):
     return render(request, 'base/forms/orderitem_from.html', context)
 
 
+@login_required(login_url='login')
 def createOrder(request):
     form = OrderForm()
     if request.method == 'POST':
@@ -208,6 +342,7 @@ def createOrder(request):
     return render(request, 'base/forms/order_form.html', context)
 
 
+@login_required(login_url='login')
 def updateOrder(request, pk):
     order = Order.objects.get(id=pk)
     form = OrderForm(instance=order)
@@ -224,6 +359,7 @@ def updateOrder(request, pk):
     return render(request, 'base/forms/order_form.html', context)
 
 
+@login_required(login_url='login')
 def deleteOrder(request, pk):
     order = Order.objects.get(id=pk)
     if request.method == 'POST':
@@ -236,13 +372,34 @@ def deleteOrder(request, pk):
     return render(request, 'base/forms/delete_order.html', context)
 
 
+@login_required(login_url='login')
 def reservation(request):
-
     reservations = Reservation.objects.all()
-    context = {'reservations': reservations}
+
+    if 'q' in request.GET:
+        q = request.GET['q']
+        reservations = Reservation.objects.filter(
+            Q(table__table_Number__icontains=q) |
+            Q(customer__name__icontains=q) |
+            Q(date_visit__icontains=q)
+        )
+
+    item_count = reservations.count()
+
+    page = request.GET.get('page', 1)
+    paginator = Paginator(reservations, 3)
+    try:
+        reservations = paginator.page(page)
+    except PageNotAnInteger:
+        reservations = paginator.page(1)
+    except EmptyPage:
+        reservations = paginator.page(paginator.num_pages)
+
+    context = {'reservations': reservations, 'item_count': item_count}
     return render(request, 'base/reservation.html', context)
 
 
+@login_required(login_url='login')
 def createReservation(request):
     form = ReservationForm()
     if request.method == 'POST':
@@ -258,6 +415,7 @@ def createReservation(request):
     return render(request, 'base/forms/reservation_form.html', context)
 
 
+@login_required(login_url='login')
 def updateReservation(request, pk):
     reservation = Reservation.objects.get(id=pk)
     form = ReservationForm(instance=reservation)
@@ -274,6 +432,7 @@ def updateReservation(request, pk):
     return render(request, 'base/forms/reservation_form.html', context)
 
 
+@login_required(login_url='login')
 def deleteReservation(request, pk):
     reservation = Reservation.objects.get(id=pk)
     if request.method == 'POST':
@@ -286,6 +445,7 @@ def deleteReservation(request, pk):
     return render(request, 'base/forms/delete_reservation.html', context)
 
 
+@login_required(login_url='login')
 def deleteReservation(request, pk):
     reservation = Reservation.objects.get(id=pk)
     if request.method == 'POST':
@@ -298,13 +458,33 @@ def deleteReservation(request, pk):
     return render(request, 'base/forms/delete_reservation.html', context)
 
 
+@login_required(login_url='login')
 def feedback(request):
     feedbacks = Feedback.objects.all()
 
-    context = {'feedbacks': feedbacks}
+    if 'q' in request.GET:
+        q = request.GET['q']
+        feedbacks = Feedback.objects.filter(
+            Q(username__icontains=q) |
+            Q(email__icontains=q)
+        )
+
+    item_count = feedbacks.count()
+
+    page = request.GET.get('page', 1)
+    paginator = Paginator(feedbacks, 2)
+    try:
+        feedbacks = paginator.page(page)
+    except PageNotAnInteger:
+        feedbacks = paginator.page(1)
+    except EmptyPage:
+        feedbacks = paginator.page(paginator.num_pages)
+
+    context = {'feedbacks': feedbacks, 'item_count': item_count}
     return render(request, 'base/feedback.html', context)
 
 
+@login_required(login_url='login')
 def deleteFeedback(request, pk):
     feedback = Feedback.objects.get(id=pk)
     if request.method == 'POST':
@@ -317,11 +497,13 @@ def deleteFeedback(request, pk):
     return render(request, 'base/forms/delete_feedback.html', context)
 
 
+@login_required(login_url='login')
 def call_waiter(request):
     calls = Call_waiter.objects.all()
     context = {'calls': calls}
     return render(request, 'base/call_waiter.html', context)
 
 
+@login_required(login_url='login')
 def qr_share(request):
     return render(request, 'base/qr_share.html')

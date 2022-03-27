@@ -60,7 +60,32 @@
 
                         </tbody>
                     </table>
-                    
+                    <strong  style="color: black;"> Total Item : {{ item_count }} </strong>
+                    {% if menus.has_other_pages %}
+                <nav class="ml-5 mt-3">
+                    <ul class="pagination pagination-gutter pagination-primary no-bg">
+                        {% if menus.has_previous %}
+                        <li class="page-item page-indicator">
+                            <a class="page-link" href="?page={{ menus.previous_page_number }}">
+                             <i class="la la-angle-left"></i></a>
+                        </li>
+                        {% endif %}
+                        {% for i in menus.paginator.page_range %}
+                        {% if menus.number == i %}
+                        <li class="page-item active "><a class="page-link">{{ i }}</a> </li>
+                        {% else %}
+                        <li class="page-item " ><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                        {% endif %}
+                        {% endfor %}
+                        {% if menus.has_next %}
+                        <li class="page-item page-indicator">
+                            <a class="page-link" href="?page={{ menus.next_page_number }}">
+                            <i class="la la-angle-right"></i></a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+                {% endif %}
                 </div>
             </div>
         </div>
