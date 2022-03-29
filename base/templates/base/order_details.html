@@ -12,7 +12,7 @@
           {{ message }}
         </div>
       {% endfor %}
-      {% for order in orders %}
+
       <div class="row">
       <div class="col-xl-12">
         <div class="card">
@@ -94,8 +94,8 @@
                                 <h4 class="my-0 text-secondary font-w600">${{ orderitem.get_total }}</h4>
                             </td>
                             <td>
-                                <a type="button" class="btn light btn-info mr-1"  href="">Edit </a>
-                                <a type="button" class="btn light btn-danger"  href="">Delete</a> 
+                                <a type="button" class="btn light btn-info mr-1"  href="{% url 'order_item_update' orderitem.id %}">Edit </a>
+                                <a type="button" class="btn light btn-danger"  href="{% url 'order_item_delete' orderitem.id %}">Delete</a> 
                             </td>
                         </tr>
                         {%endfor %}
@@ -107,7 +107,7 @@
 
 </div>
 
-{% endfor %}
+
 
     </div>
 </div>

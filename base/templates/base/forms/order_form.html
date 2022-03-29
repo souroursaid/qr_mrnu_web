@@ -18,12 +18,16 @@
                 <div class="table-responsive">
                     <form action="" method="post">
                         {% csrf_token %}
-                        <div class="row">
+                        <div class="row p-3">
                             
-                            {% for field in form %}
-                            <label class="control-label">{{ field.label }}</label>
-                            {{ field }}
-                            {% endfor %}
+                            
+                            <label class="control-label">Place Order </label>
+                            {{ form.place_order }}
+                            <label class="control-label">Table N° </label>
+                            {{ form.table }}
+                            <label class="control-label">Customer Name </label>
+                            {{ form.customer }}
+
                             <div class="col-md-12 text-center mt-4 mb-4">
                                 <input type="submit" value="submit" class="btn btn-success" />
                             </div>

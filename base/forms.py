@@ -4,6 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 
 from .models import *
 
+
 class CreateUserForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -46,10 +47,10 @@ class CreateUserForm(UserCreationForm):
             'maxlength': '22',
             'minlength': '8',
         })
+
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2']
-
 
 
 class CategoryForm(ModelForm):
@@ -60,9 +61,11 @@ class CategoryForm(ModelForm):
             'name': 'name',
             'class': 'form-control',
         })
+
     class Meta:
         model = Category
         fields = '__all__'
+
 
 class TableForm(ModelForm):
     def __init__(self, *args, **kwargs):
@@ -88,6 +91,7 @@ class TableForm(ModelForm):
     class Meta:
         model = Table
         fields = '__all__'
+
 
 class MenuForm(ModelForm):
     def __init__(self, *args, **kwargs):
@@ -124,24 +128,63 @@ class MenuForm(ModelForm):
             'type': 'text',
             'class': 'form-control',
         })
+
     class Meta:
         model = Menu
         fields = '__all__'
 
+
 class OrderForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["place_order"].widget.attrs.update({
+            'required': '',
+            'name': 'place_order',
+            'class': 'form-control',
+        })
+        self.fields["table"].widget.attrs.update({
+            'required': '',
+            'name': 'table',
+            'type': 'text',
+            'class': 'form-control',
+        })
+        self.fields["customer"].widget.attrs.update({
+            'name': 'customer',
+            'type': 'text',
+            'class': 'form-control',
+        })
 
     class Meta:
         model = Order
         fields = '__all__'
 
+
 class OrderItemForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["menu"].widget.attrs.update({
+            'required': '',
+            'name': 'menu',
+            'class': 'form-control',
+        })
+        self.fields["order"].widget.attrs.update({
+            'required': '',
+            'name': 'order',
+            'class': 'form-control',
+        })
+        self.fields["quantity"].widget.attrs.update({
+            'name': 'quantity',
+            'type': 'text',
+            'class': 'form-control',
+        })
 
     class Meta:
         model = OrderItem
         fields = '__all__'
 
+
 class ReservationForm(ModelForm):
-   
+
     class Meta:
         model = Reservation
         fields = '__all__'

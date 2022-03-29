@@ -272,7 +272,6 @@ def deleteMenu(request, pk):
 def order(request):
     orders = Order.objects.all()
 
-
     if 'q' in request.GET:
         q = request.GET['q']
         orders = Order.objects.filter(
@@ -300,31 +299,60 @@ def order(request):
 
 @login_required(login_url='login')
 def orderDetail(request, pk):
-    orders = Order.objects.filter(id=pk)
+    order = Order.objects.get(id=pk)
 
-    orderitems = OrderItem.objects.filter(order_id=pk)
+    orderitems = order.orderitem_set.all()
 
-    context = {'orders': orders, 'orderitems': orderitems}
+    context = {'order': order, 'orderitems': orderitems}
     return render(request, 'base/order_details.html', context)
 
 
 @login_required(login_url='login')
 def createOrderItem(request, pk):
     order = Order.objects.get(id=pk)
-    OrderFormSet = inlineformset_factory(
-        Order, OrderItem, fields=('menu', 'quantity'), extra=2)
-
-    formset = OrderFormSet(instance=order)
+    form = OrderItemForm(initial={'order': order})
     if request.method == 'POST':
-        print('Pring POST', request.POST)
-        formset = OrderItemForm(request.POST, instance=order)
-        if formset.is_valid():
-            formset.save()
+        # print('Pring POST', request.POST)
+        form = OrderItemForm(request.POST)
+        if form.is_valid():
+            form.save()
+            
+            messages.success(
+                request, 'Your order item was created successfully!', extra_tags='alert')
             return redirect('order_details', pk=order.pk)
 
-    context = {'formset': formset}
+    context = {'form': form}
     return render(request, 'base/forms/orderitem_from.html', context)
+    
 
+@login_required(login_url='login')
+def updateOrderItem(request, pk): 
+    orderitem = OrderItem.objects.get(id=pk) 
+    form = OrderItemForm(instance=orderitem)
+    if request.method == 'POST':
+        # print('Pring POST', request.POST)
+        form = OrderItemForm(request.POST,instance=orderitem)
+        if form.is_valid():
+            form.save()
+            
+            messages.success(
+                request, 'Your order item was updated successfully!', extra_tags='alert')
+            return redirect('order')
+
+    context = {'form': form}
+    return render(request, 'base/forms/orderitem_from.html', context)
+    
+@login_required(login_url='login')
+def deleteOrderItem(request, pk):
+    orderitem = OrderItem.objects.get(id=pk) 
+    if request.method == 'POST':
+        orderitem.delete()
+        messages.success(
+            request, 'Your order item was deleted successfully!', extra_tags='alert')
+        return redirect('order')
+
+    context = {'item': orderitem}
+    return render(request, 'base/forms/delete_order_item.html', context)
 
 @login_required(login_url='login')
 def createOrder(request):

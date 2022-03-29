@@ -39,6 +39,11 @@ urlpatterns = [
 
     path('order_item_create/<str:pk>/',
          views.createOrderItem, name="order_item_create"),
+    path('order_item_update/<str:pk>/',
+         views.updateOrderItem, name="order_item_update"),
+     path('order_item_delete/<str:pk>/',
+         views.deleteOrderItem, name="order_item_delete"),
+
 
     # Reservations Management
     path('reservation/', views.reservation, name="reservation"),

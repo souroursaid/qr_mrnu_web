@@ -17,13 +17,14 @@
                 <div class="table-responsive">
                     <form action="" method="post">
                         {% csrf_token %}
-                        <div class="row">
-                            {% for field in formset %}
-                            <div class="col-md-12">
-                            <label class="control-label">{{ field.label}} </label>
-                            {{ field}}
-                        </div>
-                        {% endfor %}
+                        <div class="row p-3">
+                            <label class="control-label">Choose menu item </label>
+                            {{ form.menu }}
+                            <label class="control-label">Order N° </label>
+                            {{ form.order }}
+                            <label class="control-label">Quantity</label>
+                            {{ form.quantity }}
+
                         <div class="col-md-12 text-center mt-4 mb-4">
                             <input type="submit" value="submit" class="btn btn-success" />
                         </div>
