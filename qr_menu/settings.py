@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'base.apps.BaseConfig',
+    'frontend_menu.apps.FrontendMenuConfig',
+
 
 ]
 MIDDLEWARE = [

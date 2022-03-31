@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class=" col-12 col-md-10 col-lg-8 ">
+        <form method="GET" action="{% url 'home' %}" >
+            <div class="card-body row no-gutters align-items-center">
+        <!--end of col-->
+                <div class="col">
+            
+                <input value="{{ request.GET.q }}" class="form-control form-control-lg form-control-borderless" type="search" name="q" placeholder="Search ">
+                 </div>
+        
+            </div>
+            </form>
+            <ul class="text-center mb-3">
+                <!-- <li style="display:inline; padding-left: 30px;"><a href="{% url 'home' %}" style="text-decoration: underline; color: green;
+                    text-decoration-color: rgb(0, 0, 0);">All</a></li> -->
+                    <li style="display:inline; padding-left: 30px;"><a href="{% url 'home' %}">All</a></li>
+
+                    {% for category in categorys%}
+                        <li style="display:inline; padding-left: 30px;"><a href="{% url 'home' %}?q={{ category.name }}">{{ category.name }}</a></li>
+                    
+                    {% endfor %}
+
+              </ul>
+    </div>
+</div>
+
+
+
+        <div class="row">
+            {% for menu in menus %}
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row m-b-30">
+                            <div class="col-md-5 col-xxl-12">
+                                <div class="new-arrival-product mb-4 mb-xxl-4 mb-md-0">
+                                    <div class="new-arrivals-img-contnent">
+                                        <img class="img-fluid" src="{{ menu.imageURL }}" alt="image here" style="border: none;
+                                        border-radius: 25px;" >
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-7 col-xxl-12">
+                                <div class="new-arrival-content " style="display: inline-block; float: left">
+                                    <strong> <a href="{% url 'menu_details' menu.id%}" >{{ menu.name }} </a> </strong>
+                                    <h4 style="color: rgb(84, 144, 233);" >{{ menu.price }} DT</h4>
+                                </div>
+                                <div class="mt-2 " style="display: inline-block; float: right">
+                                    <a class="btn btn-rounded btn-outline-info" href="#"><i
+                                        class="fa fa-shopping-basket mr-2"></i>Add
+                                    to cart</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+                        <strong style=" position: absolute; top: 150%; left: 40%; margin: 0;;">
+                            Nothing matches your search
+                        </strong>
+            {% endfor %}
+
+        </div>
+
+
+{% endblock content %}

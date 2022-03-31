@@ -1,3 +1,4 @@
+from multiprocessing import context
 from django.shortcuts import redirect, render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
@@ -53,6 +54,8 @@ def logoutPage(request):
 @login_required(login_url='login')
 def home(request):
     return render(request, 'base/home.html')
+
+
 
 
 @login_required(login_url='login')

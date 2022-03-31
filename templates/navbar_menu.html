@@ -1,0 +1,41 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Logo</a>
+  <button class="btn btn-rounded btn-success"> <i class="fi fi-rr-bell-ring"> Call Waiter</i> </button>
+
+  <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+
+      </li>
+
+    </ul>
+    <div class="form-inline my-2 my-lg-0">                   
+        <a href="">
+           <img  id="cart-icon" src="{% static 'images/cart.png' %}">
+       </a>
+       
+       <p  style="	display: block; text-align: center; color:#fff;
+       background-color: rgb(233, 16, 16); width: 20px; height: 25px; border-radius: 50%; font-size: 14px;" > 0 </p> 
+
+       <li class="nav-item dropdown  my-2 my-lg-0">
+        <a style="color:black" class="nav-link dropdown-toggle flex-row" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Username
+        </a>
+        <div class="dropdown-menu  dropdown-menu-right" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Setting</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Log Out</a>
+        </div>
+      </li>
+   </div>
+
+   
+
+  </div>
+</nav>

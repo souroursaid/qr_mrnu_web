@@ -1814,18 +1814,18 @@ pre {
   .form-control:focus {
     color: #495057;
     background-color: #fff;
-    border-color: #9daaef;
+    border-color: #862153;
     outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(47, 76, 221, 0.25); }
+    box-shadow: 0 0 0 0.2rem rgba(146, 25, 116, 0.25); }
   .form-control::placeholder {
-    color: #6c757d;
+    color: #8d3381;
     opacity: 1; }
   .form-control:disabled, .form-control[readonly] {
     background-color: #e9ecef;
     opacity: 1; }
 
 select.form-control:focus::-ms-value {
-  color: #495057;
+  color: #993699;
   background-color: #fff; }
 
 .form-control-file,

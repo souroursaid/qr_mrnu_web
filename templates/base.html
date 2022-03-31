@@ -13,24 +13,22 @@
     <link href="{% static 'vendor/bootstrap-select/dist/css/bootstrap-select.min.css' %}" rel="stylesheet">
 
     <link href="{% static 'styles/style.css' %}" rel="stylesheet">
+    <link href="{% static 'styles/main.css' %}" rel="stylesheet">
 	<link href="https://cdn.lineicons.com/2.0/LineIcons.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/304b3ec665.js" crossorigin="anonymous"></script>  
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
 </head>
 <body>
-    {% include 'navbar.html' %}
-
-    {% include 'sidebar.html' %}
-    <div id="main-wrapper">
+    {% include 'navbar_menu.html' %}
+    <div class="container">
 
     {% block content %}
 
-
     {% endblock content %}
-    </div>
+</div>
     <script src="{% static 'vendor/global/global.min.js' %}"></script>
 	<script src="{% static 'vendor/bootstrap-select/dist/js/bootstrap-select.min.js' %}"></script>
-	<script src="{% static 'vendor/chart.js/Chart.bundle.min.js' %}"></script>
+
     <script src="{% static 'js/custom.min.js' %}"></script>
 	<script src="{% static 'js/deznav-init.js' %}"></script>
 	
@@ -45,6 +43,6 @@
 	<script src="{% static 'vendor/peity/jquery.peity.min.js' %}"></script>
 	
 	<!-- Dashboard 1 -->
-	<script src="{% static 'js/dashboard/dashboard-1.js' %}"></script>
+
 </body>
 </html>
