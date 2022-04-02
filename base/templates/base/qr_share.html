@@ -56,12 +56,17 @@
 
  
                     </div>
-                    <div class="row">
-                        <img src="{% static 'images/qr.jpg' %}" alt="qr here" width="200" height="200"  >
-                        
-
+                    <div class="row justify-content-center ">
+                           <img src="{{ qr_code.image.url }}" width="200">
+                           
+                          
                     </div>
-                    <button type="button" class="btn btn-rounded btn-dark"> Download </button>
+                    <div class="text-center">
+                        <a href="{{ qr_code.image.url }}" download>
+                            <button  type="button" class="btn btn-rounded btn-dark position-relative pr-5 pl-5 " > Download </button>
+
+                          </a>
+                    </div>
                 </div>
 
             </div>

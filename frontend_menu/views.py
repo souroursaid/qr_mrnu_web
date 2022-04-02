@@ -1,7 +1,7 @@
 
 from django.shortcuts import render
 from django.db.models import Q
-from base.models import Menu, Category
+from base.models import *
 
 # Create your views here.
 
@@ -25,4 +25,12 @@ def menuDetails(request,pk):
     menu = Menu.objects.get(id=pk)
     context = {'menu':menu}
     return render(request, 'frontend_menu/menu_details.html',context)
+
+def cart(request,pk):
+
+
+    table = Table.objects.get(id=pk)
+    items = table.order_set.all()
+    context = {'items':items}
+    return render(request, 'frontend_menu/cart.html',context)
 

@@ -9,6 +9,11 @@ from django.contrib.auth.decorators import login_required
 from .decorators import unauthenticated_user, allowed_users
 from .models import *
 from .forms import *
+
+from django.conf import settings    
+from qrcode import *
+import random
+
 # Create your views here.
 
 
@@ -535,6 +540,20 @@ def call_waiter(request):
     return render(request, 'base/call_waiter.html', context)
 
 
+
+
+
+
+def qr_generator(request):
+    if request.method=="POST":
+        Url=request.POST['url']
+        QrCode.objects.create(url=Url)
+        
+    qr_code=QrCode.objects.all()
+    return render(request,"base/qr_generator.html",{'qr_code':qr_code})
+
 @login_required(login_url='login')
 def qr_share(request):
-    return render(request, 'base/qr_share.html')
+    qr_code=QrCode.objects.last()
+    context = {'qr_code':qr_code}
+    return render(request, 'base/qr_share.html', context)

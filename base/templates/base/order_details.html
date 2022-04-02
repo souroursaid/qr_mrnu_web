@@ -14,7 +14,7 @@
         </div>
       {% endfor %}
 
-      <div class="row">
+        <div class="row">
       <div class="col-xl-12">
         <div class="card">
             <div class="card-header">
@@ -58,7 +58,7 @@
             </div>
         </div>
     </div>
-</div>
+        </div>
 
 <div class="row">
     <div class="col-xl-12">
@@ -69,6 +69,7 @@
                         
                         <tr>
                             <th class="my-0 text-black font-w500 fs-20">Items</th>
+                            <th  class="my-0 text-black font-w500 fs-20">Name</th>
                             <th style="width:10%;" class="my-0 text-black font-w500 fs-20">Qty</th>
                             <th style="width:10%;" class="my-0 text-black font-w500 fs-20">Price</th>
                             <th class="my-0 text-black font-w500 fs-20">Total Price</th>
@@ -79,11 +80,10 @@
                             <td>
                                 <div class="media">
                                     <img class="mr-3 img-fluid rounded" width="85" src="{{ orderitem.menu.imageURL }}" alt="image here">
-                                    <div class="media-body">
-                                        <h5 class="mt-0 mb-2 text-black mb-4">{{ orderitem.menu.name }}</h5>
- 
-                                    </div>
                                 </div>
+                            </td>
+                            <td>
+                                <h4 class="my-0 text-secondary font-w600">{{ orderitem.menu.name }}</h4>
                             </td>
                             <td>
                                 <h4 class="my-0 text-secondary font-w600">X {{ orderitem.quantity }}</h4>

@@ -59,6 +59,8 @@ urlpatterns = [
 
     path('call_waiter/', views.call_waiter, name="call_waiter"),
     path('qr_share/', views.qr_share, name="qr_share"),
+    path('qr_generator/', views.qr_generator, name="qr_generator"),
+    
 
     
 

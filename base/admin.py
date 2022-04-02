@@ -13,5 +13,6 @@ admin.site.register(Call_waiter)
 admin.site.register(Reservation)
 admin.site.register(Feedback)
 admin.site.register(Contact_detail)
+admin.site.register(QrCode)
 
 
