@@ -17,7 +17,7 @@
                 <div class="card-header">
                     <h4 class="card-title">Menu</h4>
                     <div>
-                        <button type="button" class="btn light btn-dark">Back</button>
+                        <a type="button" class="btn light btn-dark" href="{{request.META.HTTP_REFERER}}">Back</a>
                         <a type="button" class="btn btn-success"  href="{% url 'menu_create' %}">Add A New Menu Item </a>
                     </div>
                 </div>

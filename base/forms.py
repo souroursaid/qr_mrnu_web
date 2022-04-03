@@ -188,3 +188,44 @@ class ReservationForm(ModelForm):
     class Meta:
         model = Reservation
         fields = '__all__'
+
+
+class ContactForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["restaurant_name"].widget.attrs.update({
+            'required': '',
+            'name': 'restaurant_name',
+            'class': 'form-control',
+        })
+        self.fields["email"].widget.attrs.update({
+            'required': '',
+            'name': 'email',
+            'type': 'email',
+            'class': 'form-control',
+        })
+        self.fields["phone"].widget.attrs.update({
+            'name': 'phone',
+            'type': 'text',
+            'class': 'form-control',
+        })
+        self.fields["address"].widget.attrs.update({
+            'name': 'address',
+            'type': 'text',
+            'class': 'form-control',
+        })
+        self.fields["city"].widget.attrs.update({
+            'name': 'city',
+            'type': 'text',
+            'class': 'form-control',
+        })
+        self.fields["zipcode"].widget.attrs.update({
+            'name': 'zipcode',
+            'type': 'text',
+            'class': 'form-control',
+        })
+
+    class Meta:
+        model = Contact_detail
+        fields = '__all__'
+

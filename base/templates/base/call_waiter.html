@@ -37,9 +37,9 @@
                                 <td>{{ call.table }}</td>
                                 <td>{{ call.date_created|date:"d-m-Y" }} <strong>{{ call.date_created|date:"H:i" }}</strong></td>
                                 <td>
-                                    <div class="btn light btn-light"id="btn">Not Solved</div>
 
-                                    <button type="button" class="btn light btn-danger" data-toggle="modal" data-target="#delete">Delete</button>
+
+                                    <a type="button" class="btn light btn-danger"  href="{% url 'callwaiter_delete' call.id %}">Delete</a> 
                                 </td>
                             </tr>
                             {% endfor %}

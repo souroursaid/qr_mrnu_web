@@ -60,6 +60,13 @@ urlpatterns = [
     path('call_waiter/', views.call_waiter, name="call_waiter"),
     path('qr_share/', views.qr_share, name="qr_share"),
     path('qr_generator/', views.qr_generator, name="qr_generator"),
+
+    path('contact/', views.contact, name="contact"),
+    path('contact_create/', views.CreateContact, name="contact_create"),
+    path('contact_update/<str:pk>/', views.updateContact, name="contact_update"),
+    path('contact_delete/<str:pk>/', views.contactdelete, name="contact_delete"),
+
+    path('callwaiter_delete/<str:pk>/', views.callWaiterDelete, name="callwaiter_delete"),
     
 
     

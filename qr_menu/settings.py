@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'base.apps.BaseConfig',
     'frontend_menu.apps.FrontendMenuConfig',
     'django_social_share',
+    'cart',
 
 
 ]
@@ -79,14 +80,13 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'cart.context_processor.cart_total_amount'
             ],
         },
     },
 ]
-AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend',
-]
+
+CART_SESSION_ID = 'cart'
 
 WSGI_APPLICATION = 'qr_menu.wsgi.application'
 

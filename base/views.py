@@ -10,7 +10,7 @@ from .decorators import unauthenticated_user, allowed_users
 from .models import *
 from .forms import *
 
-from django.conf import settings    
+from django.conf import settings
 from qrcode import *
 import random
 
@@ -59,8 +59,6 @@ def logoutPage(request):
 @login_required(login_url='login')
 def home(request):
     return render(request, 'base/home.html')
-
-
 
 
 @login_required(login_url='login')
@@ -300,8 +298,7 @@ def order(request):
     except EmptyPage:
         orders = paginator.page(paginator.num_pages)
 
- 
-    context = {'orders': orders,'item_count': item_count}
+    context = {'orders': orders, 'item_count': item_count}
     return render(request, 'base/order.html', context)
 
 
@@ -324,35 +321,36 @@ def createOrderItem(request, pk):
         form = OrderItemForm(request.POST)
         if form.is_valid():
             form.save()
-            
+
             messages.success(
                 request, 'Your order item was created successfully!', extra_tags='alert')
             return redirect('order_details', pk=order.pk)
 
     context = {'form': form}
     return render(request, 'base/forms/orderitem_from.html', context)
-    
+
 
 @login_required(login_url='login')
-def updateOrderItem(request, pk): 
-    orderitem = OrderItem.objects.get(id=pk) 
+def updateOrderItem(request, pk):
+    orderitem = OrderItem.objects.get(id=pk)
     form = OrderItemForm(instance=orderitem)
     if request.method == 'POST':
         # print('Pring POST', request.POST)
-        form = OrderItemForm(request.POST,instance=orderitem)
+        form = OrderItemForm(request.POST, instance=orderitem)
         if form.is_valid():
             form.save()
-            
+
             messages.success(
                 request, 'Your order item was updated successfully!', extra_tags='alert')
             return redirect('order')
 
     context = {'form': form}
     return render(request, 'base/forms/orderitem_from.html', context)
-    
+
+
 @login_required(login_url='login')
 def deleteOrderItem(request, pk):
-    orderitem = OrderItem.objects.get(id=pk) 
+    orderitem = OrderItem.objects.get(id=pk)
     if request.method == 'POST':
         orderitem.delete()
         messages.success(
@@ -361,6 +359,7 @@ def deleteOrderItem(request, pk):
 
     context = {'item': orderitem}
     return render(request, 'base/forms/delete_order_item.html', context)
+
 
 @login_required(login_url='login')
 def createOrder(request):
@@ -540,20 +539,79 @@ def call_waiter(request):
     return render(request, 'base/call_waiter.html', context)
 
 
+def contact(request):
+    contact = Contact_detail.objects.last()
+    context = {'contact': contact}
+    return render(request, 'base/contact_restaurant.html', context)
 
 
+def CreateContact(request):
+    form = ContactForm()
+    if request.method == 'POST':
+        # print('Pring POST', request.POST)
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(
+                request, 'Your reservation was created successfully!', extra_tags='alert')
+            return redirect('contact')
+
+    context = {'form': form}
+    return render(request, 'base/forms/contact_form.html', context)
 
 
+def contactdelete(request, pk):
+    contact = Contact_detail.objects.get(id=pk)
+    if request.method == 'POST':
+        contact.delete()
+        messages.success(
+            request, 'Your table was deleted successfully!', extra_tags='alert')
+        return redirect('contact')
+
+    context = {'item': contact}
+    return render(request, 'base/forms/delete_contact.html', context)
+
+
+def updateContact(request, pk):
+    contact = Contact_detail.objects.get(id=pk)
+    form = ContactForm(instance=contact)
+    if request.method == 'POST':
+        # print('Pring POST', request.POST)
+        form = ContactForm(request.POST, instance=contact)
+        if form.is_valid():
+            form.save()
+            messages.success(
+                request, 'Your reservation was updated successfully!', extra_tags='alert')
+            return redirect('contact')
+
+    context = {'form': form}
+    return render(request, 'base/forms/contact_form.html', context)
+
+
+@login_required(login_url='login')
 def qr_generator(request):
-    if request.method=="POST":
-        Url=request.POST['url']
+    if request.method == "POST":
+        Url = request.POST['url']
         QrCode.objects.create(url=Url)
-        
-    qr_code=QrCode.objects.all()
-    return render(request,"base/qr_generator.html",{'qr_code':qr_code})
+
+    qr_code = QrCode.objects.all()
+    return render(request, "base/qr_generator.html", {'qr_code': qr_code})
+
 
 @login_required(login_url='login')
 def qr_share(request):
-    qr_code=QrCode.objects.last()
-    context = {'qr_code':qr_code}
+    qr_code = QrCode.objects.last()
+    context = {'qr_code': qr_code}
     return render(request, 'base/qr_share.html', context)
+
+
+def callWaiterDelete(request, pk):
+    call = Call_waiter.objects.get(id=pk)
+    if request.method == 'POST':
+        call.delete()
+        messages.success(
+            request, 'Your table was deleted successfully!', extra_tags='alert')
+        return redirect('call_waiter')
+
+    context = {'item': call}
+    return render(request, 'base/forms/delete_call.html', context)
