@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-
+{% load social_share %}
 <div class="content-body">
     <div class="container-fluid">
         <div class ="row">
@@ -16,41 +16,38 @@
                 </div>
                 <div class="card-body">
                     <h1 style="text-align:center" class="mb-4">Share your QR Menu Code</h1>
-                    <div class="row">
+                    <div class="row justify-content-center  ">
+
                         <div class="m-1">
-                            <button type="button" class="btn btn-rounded btn-outline-light">
-                            <img src="https://img.icons8.com/fluency/48/000000/facebook-messenger--v2.png"/> 
-                                <strong class="ml-2"> Messenger </strong>    
-                            </button>
-                        </div>
-                        <div class="m-1">
-                            <button type="button" class="btn btn-rounded btn-outline-light">
+                            <button type="button" class="btn btn-rounded btn-outline-light pr-3 pl-3 ">
                                 <img src="https://img.icons8.com/fluency/48/000000/facebook-new.png"/> 
-                                <strong class="ml-2"> Facebook </strong>    
+                                {% post_to_facebook object_or_url "  <strong> Facebook </strong>   " %}
                             </button>
                         </div>
                         <div class="m-1">
-                            <button type="button" class="btn btn-rounded btn-outline-light">
+                            <button type="button" class="btn btn-rounded btn-outline-light pr-3 pl-3 ">
                                 <img src="https://img.icons8.com/fluency/48/000000/gmail-new.png"/>   
-                                 <strong class="ml-2"> Email </strong>    
+                                {% send_email object.title "New Song: {{object.title}}. Check it out!" object_or_url "  <strong> Email </strong>   " %} 
                             </button>
                         </div>
                         <div class="m-1">
-                            <button type="button" class="btn btn-rounded btn-outline-light">
+                            <button type="button" class="btn btn-rounded btn-outline-light pr-3 pl-3 ">
                                 <img src="https://img.icons8.com/fluency/48/000000/whatsapp.png"/> 
-                                <strong class="ml-2"> WhatsApp </strong>    
+                                {% post_to_whatsapp object_or_url "  <strong> WhatsApp </strong>   " %} 
                             </button>
                         </div>
                         <div class="m-1">
-                            <button type="button" class="btn btn-rounded btn-outline-light">
+                            <button type="button" class="btn btn-rounded btn-outline-light pr-3 pl-3 ">
                                 <img src="https://img.icons8.com/fluency/48/000000/instagram-new.png"/>
-                                <strong class="ml-2"> Instagram </strong>    
+                                {% post_to_facebook object_or_url "  <strong> Instagram </strong>   " %} 
+
                             </button>
                         </div>
                         <div class="m-1">
-                            <button type="button" class="btn btn-rounded btn-outline-light">
+                            <button type="button" class="btn btn-rounded btn-outline-light pr-4 pl-4 " >
                                 <img src="https://img.icons8.com/fluency/48/000000/twitter.png"/>    
-                                 <strong class="ml-2"> Twitter </strong>    
+                                {% post_to_twitter "New Song: {{object.title}}. Check it out!" object_or_url "  <strong> Twitter </strong>   " %} 
+
                             </button>
                         </div>
 

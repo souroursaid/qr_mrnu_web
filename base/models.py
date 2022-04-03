@@ -123,7 +123,7 @@ class OrderItem(models.Model):
         return total
 
     def __str__ (self):
-        return "Order  %s " % (self.order.id)
+        return "Order  %s " % (self.order.customer)
 
 class Call_waiter(models.Model):
     table = models.ForeignKey(

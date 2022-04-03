@@ -9,25 +9,20 @@
               <h4 class="card-title">Order Details</h4>
               <div>
                 <a type="button" class="btn btn-rounded btn-outline-dark" href="{{request.META.HTTP_REFERER}}"> <i class="fi fi-rr-angle-left mr-1"></i> Back</a>
-                <a type="button" class="btn btn-rounded btn-success"  href="">checkout </a>
+                <a type="button" class="btn btn-rounded btn-success"  href="{% url 'checkout' %}">checkout </a>
             </div>
           </div>
           <div class="card-body">
               
               <div class="row mx-0">
-                  <div class="media align-items-center col-md-4 col-lg-6 px-0 mb-3 mb-md-0">
-                    
-                      <div class="media-body">
-                          <h4 class="my-0 text-black">Place Order :  </h4>
-                      </div>
-                  </div>
+                  
                   <div class="iconbox col-md-4 col-lg-3 mb-3 mb-md-0">
                       <h4>Total</h4>
-                      <strong></strong>
+                      <strong>{{ order.get_cart_total }}</strong>
                   </div>
                   <div class="iconbox col-md-4 col-lg-3 mb-md-0">
                       <h4>Total Items</h4>
-                      <strong></strong>
+                      <strong>{{ order.get_cart_items }}</strong>
                       
                   </div>
                  
@@ -61,20 +56,20 @@
                          
                           <td>
                             <div class="media">
-                                <img class="mr-3 img-fluid rounded" width="85" src=" " alt="image here">
+                                <img class="mr-3 img-fluid rounded" width="85" src="{{ item.menu.imageURL }} " alt="image here">
                             </div>
                         </td>
                         <td>
-                            <h4 class="my-0 text-secondary font-w600"></h4>
+                            <h4 class="my-0 text-secondary font-w600"> {{ item.menu.name }}</h4>
                         </td>
                           <td>
-                              <h4 class="my-0 text-secondary font-w600">X </h4>
+                              <h4 class="my-0 text-secondary font-w600">X {{ item.quantity }}</h4>
                           </td>
                           <td>
-                              <h4 class="my-0 text-secondary font-w600">$</h4>
+                              <h4 class="my-0 text-secondary font-w600">${{ item.menu.price }}</h4>
                           </td>
                           <td>
-                              <h4 class="my-0 text-secondary font-w600">$</h4>
+                              <h4 class="my-0 text-secondary font-w600">$ {{ item.get_total }}</h4>
                           </td>
                           
                       </tr>

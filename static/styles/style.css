@@ -255,7 +255,7 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
 html {
   font-family: sans-serif;
   line-height: 1.15;
-  -webkit-text-size-adjust: 910%;
+  -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
 
 article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
@@ -1814,18 +1814,18 @@ pre {
   .form-control:focus {
     color: #495057;
     background-color: #fff;
-    border-color: #862153;
+    border-color: #9daaef;
     outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(146, 25, 116, 0.25); }
+    box-shadow: 0 0 0 0.2rem rgba(47, 76, 221, 0.25); }
   .form-control::placeholder {
-    color: #8d3381;
+    color: #6c757d;
     opacity: 1; }
   .form-control:disabled, .form-control[readonly] {
     background-color: #e9ecef;
     opacity: 1; }
 
 select.form-control:focus::-ms-value {
-  color: #993699;
+  color: #495057;
   background-color: #fff; }
 
 .form-control-file,
