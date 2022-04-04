@@ -176,7 +176,7 @@ class Feedback(models.Model):
     def __str__(self):
         return "Feedback  %s " % (self.id)
 
-class Contact_detail(models.Model):
+class Restaurant(models.Model):
     restaurant_name = models.CharField(max_length=200, null=True)
     email = models.EmailField(max_length=100, null=True)
     phone = models.CharField(max_length=200, null=True)

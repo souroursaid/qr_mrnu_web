@@ -12,7 +12,7 @@ admin.site.register(OrderItem)
 admin.site.register(Call_waiter)
 admin.site.register(Reservation)
 admin.site.register(Feedback)
-admin.site.register(Contact_detail)
+admin.site.register(Restaurant)
 admin.site.register(QrCode)
 
 

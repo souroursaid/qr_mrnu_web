@@ -539,53 +539,53 @@ def call_waiter(request):
     return render(request, 'base/call_waiter.html', context)
 
 
-def contact(request):
-    contact = Contact_detail.objects.last()
-    context = {'contact': contact}
-    return render(request, 'base/contact_restaurant.html', context)
+def restaurant(request):
+    restaurant = Restaurant.objects.last()
+    context = {'restaurant': restaurant}
+    return render(request, 'base/restaurant.html', context)
 
 
-def CreateContact(request):
-    form = ContactForm()
+def CreateRestaurant(request):
+    form = RestaurantForm()
     if request.method == 'POST':
         # print('Pring POST', request.POST)
-        form = ContactForm(request.POST)
+        form = RestaurantForm(request.POST)
         if form.is_valid():
             form.save()
             messages.success(
-                request, 'Your reservation was created successfully!', extra_tags='alert')
-            return redirect('contact')
+                request, 'Your restaurant contact was created successfully!', extra_tags='alert')
+            return redirect('restaurant')
 
     context = {'form': form}
-    return render(request, 'base/forms/contact_form.html', context)
+    return render(request, 'base/forms/restaurant_form.html', context)
 
 
-def contactdelete(request, pk):
-    contact = Contact_detail.objects.get(id=pk)
+def Restaurantdelete(request, pk):
+    restaurant = Restaurant.objects.get(id=pk)
     if request.method == 'POST':
-        contact.delete()
+        restaurant.delete()
         messages.success(
-            request, 'Your table was deleted successfully!', extra_tags='alert')
-        return redirect('contact')
+            request, 'Your rastaurant contact was deleted successfully!', extra_tags='alert')
+        return redirect('restaurant')
 
-    context = {'item': contact}
-    return render(request, 'base/forms/delete_contact.html', context)
+    context = {'item': restaurant}
+    return render(request, 'base/forms/delete_restaurant.html', context)
 
 
-def updateContact(request, pk):
-    contact = Contact_detail.objects.get(id=pk)
-    form = ContactForm(instance=contact)
+def updateRestaurant(request, pk):
+    restaurant = Restaurant.objects.get(id=pk)
+    form = RestaurantForm(instance=restaurant)
     if request.method == 'POST':
         # print('Pring POST', request.POST)
-        form = ContactForm(request.POST, instance=contact)
+        form = RestaurantForm(request.POST, instance=restaurant)
         if form.is_valid():
             form.save()
             messages.success(
                 request, 'Your reservation was updated successfully!', extra_tags='alert')
-            return redirect('contact')
+            return redirect('restaurant')
 
     context = {'form': form}
-    return render(request, 'base/forms/contact_form.html', context)
+    return render(request, 'base/forms/restaurant_form.html', context)
 
 
 @login_required(login_url='login')

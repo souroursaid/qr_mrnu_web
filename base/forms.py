@@ -190,7 +190,7 @@ class ReservationForm(ModelForm):
         fields = '__all__'
 
 
-class ContactForm(ModelForm):
+class RestaurantForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields["restaurant_name"].widget.attrs.update({
@@ -226,6 +226,6 @@ class ContactForm(ModelForm):
         })
 
     class Meta:
-        model = Contact_detail
+        model = Restaurant
         fields = '__all__'
 
