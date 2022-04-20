@@ -1,11 +1,19 @@
 from multiprocessing import context
+from typing import Generic
+from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
+from django.urls import reverse_lazy
+
 from django.shortcuts import redirect, render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 from django.contrib import messages
+from django.contrib.auth.models import Group
 from django.forms import inlineformset_factory
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+
 from .decorators import unauthenticated_user, allowed_users
 from .models import *
 from .forms import *
@@ -22,8 +30,11 @@ def registrationPage(request):
     form = CreateUserForm()
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
+
         if form.is_valid():
+            form.instance.is_staff = True
             form.save()
+
             user = form.cleaned_data.get('username')
             messages.success(request, 'Account was created for ' + user)
 
@@ -35,18 +46,25 @@ def registrationPage(request):
 
 @unauthenticated_user
 def loginPage(request):
-
+    users_in_group = Group.objects.get(name="waitstaff").user_set.all()
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
 
         user = authenticate(request, username=username, password=password)
 
-        if user is not None:
-            login(request, user)
-            return redirect('/')
+        if user in users_in_group:
+            if user is not None:
+                login(request, user)
+                return redirect('staff_dashboard')
+            else:
+                messages.error(request, 'Username OR password is incorrect')
         else:
-            messages.error(request, 'Username OR password is incorrect')
+            if user is not None:
+                login(request, user)
+                return redirect('/')
+            else:
+                messages.error(request, 'Username OR password is incorrect')
 
     return render(request, 'base/login.html')
 
@@ -615,3 +633,29 @@ def callWaiterDelete(request, pk):
 
     context = {'item': call}
     return render(request, 'base/forms/delete_call.html', context)
+
+
+def staff(request):
+    staffs = User.objects.filter(groups__name='waitstaff')
+    context = {'staffs': staffs}
+    return render(request, 'base/staff.html', context)
+
+
+def createStaff(request):
+
+    form = StaffForm()
+    if request.method == 'POST':
+        form = StaffForm(request.POST)
+
+        if form.is_valid():
+            user = form.save()
+            group = Group.objects.get(name='waitstaff')
+            user.groups.add(group)
+
+            user = form.cleaned_data.get('username')
+            messages.success(request, 'Account was created for ' + user)
+
+            return redirect('staff')
+
+    context = {'form': form}
+    return render(request, 'base/forms/staff_form.html', context)

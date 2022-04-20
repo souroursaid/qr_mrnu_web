@@ -6,6 +6,7 @@ urlpatterns = [
 
     path('', views.home, name="dashboard"),
     path('login/', views.loginPage, name="login"),
+    path('staff_dashboard', views.home, name="staff_dashboard"),
     path('logout/', views.logoutPage, name="logout"),
     path('registration/', views.registrationPage, name="registration"),
     path('profile/', views.profile, name="profile"),
@@ -68,7 +69,8 @@ urlpatterns = [
 
     path('callwaiter_delete/<str:pk>/', views.callWaiterDelete, name="callwaiter_delete"),
     
-
+    path('staff/', views.staff, name="staff"),
+    path('staff_create/', views.createStaff, name="staff_create"),
     
 
 ]

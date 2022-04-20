@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     'base.apps.BaseConfig',
     'frontend_menu.apps.FrontendMenuConfig',
     'django_social_share',
-    'cart',
+    'rest_framework',
 
 
 ]
