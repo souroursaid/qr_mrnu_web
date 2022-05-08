@@ -48,7 +48,7 @@ class Menu(models.Model):
     price = models.DecimalField(
         null=True, blank=True, max_digits=5, decimal_places=2)
     image = models.ImageField(upload_to='images/', null=True, blank=True)
-    description = models.TextField(max_length=200, null=True, blank=True)
+    description = models.TextField(max_length=300, null=True, blank=True)
 
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     date_updated = models.DateTimeField(auto_now=True, null=True)
@@ -156,9 +156,9 @@ class Call_waiter(models.Model):
 class Reservation(models.Model):
     table = models.ForeignKey(
         Table, on_delete=models.CASCADE, null=True, blank=True)
-    customer = models.ForeignKey(
-        Customer, on_delete=models.CASCADE, null=True, blank=True)
+    name = models.CharField(max_length=100, null=True)
     number_people = models.IntegerField(null=True, blank=True)
+    phone_number = models.IntegerField(null=True, blank=True)
     note = models.CharField(max_length=100, null=True)
     date_visit = models.DateTimeField(null=True)
 
@@ -181,8 +181,8 @@ class Feedback(models.Model):
                             choices=CLASSIFY, blank=True)
     service = models.CharField(
         max_length=100, null=True, choices=CLASSIFY, blank=True)
-    customer = models.ForeignKey(
-        Customer, on_delete=models.CASCADE, null=True, blank=True)
+    name = models.CharField(max_length=100, null=True)
+    phone_number = models.IntegerField(null=True, blank=True)
     suggestions = models.CharField(max_length=200, null=True, blank=True)
 
     date_updated = models.DateTimeField(auto_now=True, null=True)

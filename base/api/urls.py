@@ -28,7 +28,8 @@ urlpatterns = [
     path('feedback_create/', views.createFeedback, name="feedback_create"),
 
     path('reservations/', views.getReservations, name="feedbacks"),
-    path('reservation_create/', views.createReservation, name="reservation_create"),
+    path('reservation_create/', views.createReservation,
+         name="reservation_create_api"),
 
     path('order_items/', views.getOrderItems, name="order_items"),
     path('order_item_create/', views.createOrderItem, name="order_item_create"),

@@ -9,6 +9,12 @@ def getRoutes(request):
     routes = [
         'GET /api/category',
         'GET /api/category/:id',
+        {
+            'Endpoint': '/reservation/',
+            'method': 'POST',
+            'body': {'body': ""},
+            'description': 'create new reservation with data send from post request',
+        },
         'GET /api/restaurant',
         'GET /api/restaurant/:id',
         'GET /api/menu',
