@@ -29,13 +29,13 @@
             </li>
             {% endif %}
             
-            {% if request.user.is_staff %}
+            
             <li><a href="{% url 'menu' %}" class="ai-icon" aria-expanded="false">
                 <i class="fi fi-rr-book-alt"></i>
                     <span class="nav-text">Menu</span>
                 </a>
             </li>
-            {% endif %}
+            
             {% if request.user.is_staff %}
             <li><a href="{% url 'table' %}" class="ai-icon" aria-expanded="false">
                 <i class="fi fi-rr-layout-fluid"></i>

@@ -18,7 +18,9 @@
                     <h4 class="card-title">Menu</h4>
                     <div>
                         <a type="button" class="btn light btn-dark" href="{{request.META.HTTP_REFERER}}">Back</a>
+                        {% if request.user.is_staff %}
                         <a type="button" class="btn btn-success"  href="{% url 'menu_create' %}">Add A New Menu Item </a>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="card-body">
@@ -31,7 +33,9 @@
                                 <th><strong>Price</strong></th>
                                 <th><strong>Image</strong></th>
                                 <th><strong>Description</strong></th>
+                                {% if request.user.is_staff %}
                                 <th><strong>Action</strong></th>
+                                {% endif %}
                             </tr>
                         </thead>
                         <tbody>
@@ -49,11 +53,13 @@
                                 <td>None</td>
                                 {% endif %}
                                 <td>{{ menu.description|truncatechars:15 }} </td>
+                                {% if request.user.is_staff %}
                                 <td>
                                     <a type="button" class="btn light btn-info" href="{% url 'menu_update' menu.id %}" >Edit</a>
 
                                     <a type="button" class="btn light btn-danger"  href="{% url 'menu_delete' menu.id %} ">Delete</a> 
                                 </td>
+                                {% endif %}
                             </tr>
                             {% endfor %}
 

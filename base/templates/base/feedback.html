@@ -32,7 +32,7 @@
                                 <td> {{ feedback.ambiance }} </td>
                                 <td> {{ feedback.food }}  </td>
                                 <td>{{ feedback.service }} </td>
-                                <td>{{ feedback.customer.name }} </td>
+                                <td>{{ feedback.name }} </td>
                                 <td>{{ feedback.date_created|date:"d-m-Y" }}</td>
 
                                 <td>
@@ -51,15 +51,15 @@
                                             <div class="basic-form">
                                                 <form>
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Customer Email</label>
+                                                        <label class="col-sm-3 col-form-label">Customer Name</label>
                                                         <div class="col-sm-9">
-                                                            <input type="email" class="form-control" placeholder="Email" value="{{ feedback.customer.email }}">
+                                                            <input type="text" class="form-control" placeholder="Name" value="{{ feedback.name }}">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <label class="col-sm-3 col-form-label">Phone</label>
                                                         <div class="col-sm-9">
-                                                            <input type="number" class="form-control" placeholder="Phone Number" value="{{ feedback.customer.phone }}">
+                                                            <input type="number" class="form-control" placeholder="Phone Number" value="{{ feedback.phone_number }}">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
