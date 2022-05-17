@@ -48,23 +48,6 @@ class FeedbackSerializer(ModelSerializer):
 
 class OrderItemSerializer(ModelSerializer):
 
-    def restore_object(self, attrs, instance=None):
-        assert instance is None, 'Cannot update users with UserFromEmailSerializer'
-
-        (user_object, created) = Customer().objects.get_or_create(
-            email=attrs.get('email')
-        )
-
-        # You can extend here to work on `user_object` as required - update etc.
-
-        return user_object
-
     class Meta:
         model = OrderItem
-        fields = '__all__'
-
-
-class OrderSerializer(ModelSerializer):
-    class Meta:
-        model = Order
         fields = '__all__'

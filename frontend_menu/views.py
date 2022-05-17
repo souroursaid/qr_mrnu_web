@@ -50,6 +50,5 @@ def checkout(request):
         items = []
         order = {'get_cart_total': 0, 'get_cart_items': 0}
     tables = Table.objects.all()
-    context = {'tables': tables,'items': items, 'order': order}
+    context = {'tables': tables, 'items': items, 'order': order}
     return render(request, 'frontend_menu/checkout.html', context)
-

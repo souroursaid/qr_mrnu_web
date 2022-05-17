@@ -59,6 +59,27 @@ def createCategory(request):
     return Response(serializer.data)
 
 
+@api_view(['GET'])
+def getOrderItem(request):
+    orders = OrderItem.objects.all()
+    serializer = OrderItemSerializer(orders, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['POST'])
+def createOrderItem(request):
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer)
+
+    serializer = OrderItemSerializer(data=request.data)
+
+    if serializer.is_valid():
+        serializer.save()
+
+    return Response(serializer.data)
+
+
 @api_view(['POST'])
 def updateCategory(request, pk):
     category = Category.objects.get(id=pk)
@@ -188,60 +209,5 @@ def createFeedback(request):
     return Response(serializer.data)
 # feedback crud END .
 
-# order item crud START .
-
-
-@api_view(['GET'])
-def getOrderItems(request):
-    feedback = Feedback.objects.all()
-    serializer = OrderItemSerializer(feedback, many=True)
-    return Response(serializer.data)
-
-
-@api_view(['POST'])
-def createOrderItem(request):
-    serializer = OrderItemSerializer(data=request.data)
-
-    if serializer.is_valid():
-        serializer.save()
-
-    return Response(serializer.data)
-# order item crud END .
 
 # order crud START .
-
-
-@api_view(['GET'])
-def getOrders(request):
-    orders = Order.objects.all()
-    serializer = OrderSerializer(orders, many=True)
-    return Response(serializer.data)
-
-
-@api_view(['GET'])
-def getOrder(request, pk):
-    order = Order.objects.get(id=pk)
-    serializer = OrderSerializer(order, many=False)
-    return Response(serializer.data)
-
-
-@api_view(['POST'])
-def createOrder(request):
-    serializer = OrderSerializer(data=request.data)
-
-    if serializer.is_valid():
-        serializer.save()
-
-    return Response(serializer.data)
-
-
-@api_view(['POST'])
-def updateOrder(request, pk):
-    order = Order.objects.get(id=pk)
-    serializer = OrderSerializer(instance=order, data=request.data)
-
-    if serializer.is_valid():
-        serializer.save()
-
-    return Response(serializer.data)
-# order crud END .

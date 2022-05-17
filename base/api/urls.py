@@ -31,13 +31,9 @@ urlpatterns = [
     path('reservation_create/', views.createReservation,
          name="reservation_create_api"),
 
-    path('order_items/', views.getOrderItems, name="order_items"),
-    path('order_item_create/', views.createOrderItem, name="order_item_create"),
+    path('order_items/', views.getOrderItem, name="order_items"),
 
-    path('orders/', views.getOrders, name="orders"),
-    path('orders/<str:pk>', views.getOrder, name="order"),
-    path('orders_create/', views.createOrder, name="orders_create"),
-    path('orders_update/<str:pk>/',
-         views.updateOrder, name="orders_update"),
+
+    path('orderitem_create/', views.createOrderItem, name="orderitem_create"),
 
 ]
