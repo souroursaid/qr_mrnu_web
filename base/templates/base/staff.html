@@ -34,11 +34,12 @@
                         <tbody>
                             {% for staff in staffs %}
                             <tr>
-                                <td>{{ staff.user.username}}</td>
+                                <td>{{ staff.username}}</td>
                                 <td>{{ staff.email }}</td>
                                 <td> 
 
-                                    <button type="button" class="btn light btn-danger" data-toggle="modal" data-target="#delete">Delete</button>
+                                    <a type="button" class="btn light btn-danger"  href="">Delete</a> 
+
                                 </td>
                             </tr>
                             {% endfor %}

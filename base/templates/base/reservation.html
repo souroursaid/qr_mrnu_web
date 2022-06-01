@@ -38,7 +38,7 @@
                                     {% for reservation in reservations %}
                                     <tr>
                                         <td><strong>{{ reservation.table }}</strong></td>
-                                        <td>{{ reservation.customer.name }}</td>
+                                        <td>{{ reservation.name }}</td>
                                         <td>{{ reservation.date_visit|date:"d-m-Y" }} <strong>{{ reservation.date_visit|date:"H:i" }}</strong></td>
                                         <td>
                                             <a type="button" class="btn light btn-info" href="{% url 'reservation_update' reservation.id %}" >Edit</a>

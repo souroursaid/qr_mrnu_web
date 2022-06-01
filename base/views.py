@@ -4,7 +4,7 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
 from django.urls import reverse_lazy
-
+import pandas as pd
 from django.shortcuts import redirect, render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
@@ -13,11 +13,12 @@ from django.contrib.auth.models import Group
 from django.forms import inlineformset_factory
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-
+from datetime import datetime
 from .decorators import unauthenticated_user, allowed_users
 from .models import *
 from .forms import *
-
+from django.utils.timezone import now
+from datetime import timedelta
 from django.conf import settings
 from qrcode import *
 import random
@@ -56,7 +57,7 @@ def loginPage(request):
         if user in users_in_group:
             if user is not None:
                 login(request, user)
-                return redirect('staff_dashboard')
+                return redirect('/')
             else:
                 messages.error(request, 'Username OR password is incorrect')
         else:
@@ -76,7 +77,35 @@ def logoutPage(request):
 
 @login_required(login_url='login')
 def home(request):
-    return render(request, 'base/home.html')
+    orders = Order.objects.all()
+    customers = Customer.objects.all()
+    menus = Menu.objects.all()
+    reservations = Reservation.objects.all()
+    category = Category.objects.all()
+
+    total_menus = menus.count()
+    total_customers = customers.count()
+    total_orders = orders.count()
+    total_reservations = reservations.count()
+
+    data = []
+    restaurant = orders.filter(place_order="Restaurant").count()
+    delivery = orders.filter(place_order="Delivery").count()
+    data.append(restaurant)
+    data.append(delivery)
+
+    item = Customer.objects.all().values()
+    df = pd.DataFrame(item)
+    df = df['id'].tolist()
+
+    context = {
+        'total_orders': total_orders, 'total_customers': total_customers, 'df': df,
+
+        'data': data,
+
+        'total_menus': total_menus, 'total_reservations': total_reservations, 'category': category
+    }
+    return render(request, 'base/home.html', context)
 
 
 @login_required(login_url='login')
@@ -229,7 +258,12 @@ def menu(request):
 
     if 'q' in request.GET:
         q = request.GET['q']
-        menus = Menu.objects.filter(name__icontains=q)
+        menus = Menu.objects.filter(
+
+
+            Q(name__icontains=q) |
+            Q(category__name__contains=q)
+        )
 
     item_count = menus.count()
 
@@ -433,7 +467,7 @@ def reservation(request):
         q = request.GET['q']
         reservations = Reservation.objects.filter(
             Q(table__table_Number__icontains=q) |
-            Q(customer__name__icontains=q) |
+            Q(name__icontains=q) |
             Q(date_visit__icontains=q)
         )
 
@@ -659,3 +693,16 @@ def createStaff(request):
 
     context = {'form': form}
     return render(request, 'base/forms/staff_form.html', context)
+
+
+@login_required(login_url='login')
+def deleteStaff(request, pk):
+    staff = User.objects.filter(groups__name='waitstaff')
+    if request.method == 'POST':
+        staff.delete()
+        messages.success(
+            request, 'Your menu item was deleted successfully!', extra_tags='alert')
+        return redirect('staff')
+
+    context = {'item': staff}
+    return render(request, 'base/forms/delete_staff.html', context)

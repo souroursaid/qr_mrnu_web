@@ -14,5 +14,3 @@ admin.site.register(Reservation)
 admin.site.register(Feedback)
 admin.site.register(Restaurant)
 admin.site.register(QrCode)
-
-

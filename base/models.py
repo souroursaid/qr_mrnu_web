@@ -49,6 +49,8 @@ class Menu(models.Model):
         null=True, blank=True, max_digits=5, decimal_places=2)
     image = models.ImageField(upload_to='images/', null=True, blank=True)
     description = models.TextField(max_length=300, null=True, blank=True)
+    three_d_food = models.FileField(
+        upload_to='videos/', null=True, verbose_name="", blank=True)
 
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     date_updated = models.DateTimeField(auto_now=True, null=True)

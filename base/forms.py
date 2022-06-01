@@ -7,9 +7,7 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import *
 
 
-
 class CreateUserForm(UserCreationForm):
-
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -54,7 +52,7 @@ class CreateUserForm(UserCreationForm):
         })
 
     class Meta:
-        
+
         model = User
         fields = ['username', 'email', 'password1', 'password2']
 
@@ -154,15 +152,10 @@ class OrderForm(ModelForm):
             'type': 'text',
             'class': 'form-control',
         })
-        self.fields["customer"].widget.attrs.update({
-            'name': 'customer',
-            'type': 'text',
-            'class': 'form-control',
-        })
 
     class Meta:
         model = Order
-        fields = '__all__'
+        fields = ['place_order', 'table']
 
 
 class OrderItemForm(ModelForm):
@@ -235,6 +228,7 @@ class RestaurantForm(ModelForm):
         model = Restaurant
         fields = '__all__'
 
+
 class StaffForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -274,7 +268,7 @@ class StaffForm(UserCreationForm):
             'maxlength': '22',
             'minlength': '8',
         })
-    
+
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2']
