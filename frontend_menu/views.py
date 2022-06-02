@@ -7,5 +7,5 @@ from cart.cart import Cart
 
 
 def home(request):
-    return render(request, 'frontend_menu/home.html')
+    return render(request, 'frontend_menu/qrhome.html')
 
