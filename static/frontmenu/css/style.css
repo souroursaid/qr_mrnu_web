@@ -1,6 +1,6 @@
 /********** Template CSS **********/
 :root {
-    --primary: #FEA116;
+    --primary: #FF9800;
     --light: #F1F8FF;
     --dark: #0F172B;
 }
@@ -188,7 +188,7 @@
     top: 50%;
     left: -55px;
     margin-top: -1px;
-    background: #f78c4a;;
+    background: #FF9800;;
 }
 
 .section-title::after {
@@ -199,7 +199,7 @@
     top: 50%;
     right: -55px;
     margin-top: -1px;
-    background: #f78c4a;
+    background: #FF9800;
 }
 
 .section-title.text-start::before,
@@ -215,7 +215,7 @@
 }
 
 .service-item:hover {
-    background: #f78c4a;
+    background: #FF9800;
 }
 
 .service-item * {
