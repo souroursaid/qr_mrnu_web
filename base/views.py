@@ -110,7 +110,7 @@ def home(request):
 
 @login_required(login_url='login')
 def profile(request):
-    manager = request.user.manager
+    manager = request.user
     form = ManagerForm(instance=manager)
 
     if request.method == 'POST':

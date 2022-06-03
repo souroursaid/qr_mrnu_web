@@ -100,8 +100,12 @@ WSGI_APPLICATION = 'qr_menu.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+       'ENGINE': 'django.db.backends.postgresql',
+        	'NAME': 'qr_menu',
+        	'USER': 'postgres',
+        	'PASSWORD': 'sourour148',
+        	'HOST':'localhost',
+        	'PORT':'6000',
     }
 }
 

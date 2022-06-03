@@ -1,3 +1,4 @@
+from email.policy import default
 from django.db import models
 from django.contrib.auth.models import User
 import qrcode
@@ -16,7 +17,7 @@ class Customer(models.Model):
         User, on_delete=models.CASCADE, null=True, blank=True)
     name = models.CharField(max_length=200, null=True)
     phone = models.IntegerField(null=True)
-    image = models.ImageField(upload_to='profile/', null=True, blank=True)
+    image = models.ImageField(upload_to='profile/', default='profile/profile.png',null=True, blank=True)
     email = models.EmailField(max_length=100, null=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     date_updated = models.DateTimeField(auto_now=True, null=True)
@@ -33,7 +34,8 @@ class Manager(models.Model):
         User, on_delete=models.CASCADE, null=True, blank=True)
     name = models.CharField(max_length=200, null=True)
     phone = models.IntegerField(null=True)
-    image = models.ImageField(upload_to='profile/', null=True, blank=True)
+    image = models.ImageField(
+        upload_to='profile/', default='profile/profile.png', null=True, blank=True)
     email = models.EmailField(max_length=100, null=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     date_updated = models.DateTimeField(auto_now=True, null=True)
