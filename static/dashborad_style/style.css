@@ -1799,7 +1799,7 @@ pre {
   font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #495057;
+  color: #000000;
   background-color: #fff;
   background-clip: padding-box;
   border: 1px solid #f0f1f5;
@@ -1814,18 +1814,18 @@ pre {
   .form-control:focus {
     color: #495057;
     background-color: #fff;
-    border-color: #9daaef;
+    border-color: #efc09d;
     outline: 0;
     box-shadow: 0 0 0 0.2rem rgba(47, 76, 221, 0.25); }
   .form-control::placeholder {
-    color: #6c757d;
+    color: #000000;
     opacity: 1; }
   .form-control:disabled, .form-control[readonly] {
     background-color: #e9ecef;
     opacity: 1; }
 
 select.form-control:focus::-ms-value {
-  color: #495057;
+  color: #000000;
   background-color: #fff; }
 
 .form-control-file,
