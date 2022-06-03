@@ -8334,7 +8334,7 @@ button.bg-dark:focus {
   color: #fff !important; }
 
 .text-primary {
-  color: #2f4cdd !important; }
+  color: #FF9800 !important; }
 
 a.text-primary:hover, a.text-primary:focus {
   color: #1b32a5 !important; }
@@ -11672,17 +11672,17 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
           height: 100%;
           margin-right: 5px;
           margin-top: -3px;
-          color: #2f4cdd; }
+          color: #FF9800; }
         .deznav .metismenu > li > a g [fill] {
-          fill: #2f4cdd; }
+          fill: #FF9800; }
       .deznav .metismenu > li:hover > a, .deznav .metismenu > li:focus > a {
-        color: #2f4cdd; }
+        color: #FF9800; }
         .deznav .metismenu > li:hover > a g [fill], .deznav .metismenu > li:focus > a g [fill] {
-          fill: #2f4cdd; }
+          fill: #FF9800; }
       .deznav .metismenu > li.mm-active > a {
-        color: #2f4cdd; }
+        color: #FF9800; }
         .deznav .metismenu > li.mm-active > a g [fill] {
-          fill: #2f4cdd; }
+          fill: #FF9800; }
     .deznav .metismenu li {
       position: relative; }
     .deznav .metismenu ul {
@@ -11705,7 +11705,7 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
             padding-left: 3.5rem; } }
         .deznav .metismenu ul a:hover, .deznav .metismenu ul a:focus, .deznav .metismenu ul a.mm-active {
           text-decoration: none;
-          color: #2f4cdd; }
+          color: #FF9800; }
     .deznav .metismenu a {
       position: relative;
       display: block;
@@ -11970,16 +11970,16 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
       position: absolute;
       left: 0;
       top: 0;
-      background: #2f4cdd;
+      background: #FF9800;
       -webkit-transition: all 0.5s;
       -ms-transition: all 0.5s;
       transition: all 0.5s;
       border-radius: 0 0.375rem 0.375rem 0; }
   [data-sidebar-style="full"][data-layout="vertical"] .deznav .metismenu > li.mm-active > a {
-    background: #f4f6fd;
-    color: #2f4cdd; }
+    background: #fcf3e6;
+    color: #FF9800; }
     [data-sidebar-style="full"][data-layout="vertical"] .deznav .metismenu > li.mm-active > a i {
-      color: #2f4cdd; }
+      color: #FF9800; }
     [data-sidebar-style="full"][data-layout="vertical"] .deznav .metismenu > li.mm-active > a:before {
       width: 8px; }
       @media only screen and (max-width: 1400px) {
@@ -12044,7 +12044,7 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
       [data-sidebar-style="full"][data-layout="vertical"] .menu-toggle .deznav .metismenu li > ul:after {
         content: "";
         position: absolute;
-        background: inherit;
+        background: #FF9800;
         width: 10px;
         height: 10px;
         transform: rotate(45deg);
@@ -12075,7 +12075,7 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
       [data-sidebar-style="full"][data-layout="vertical"] .menu-toggle .deznav .metismenu > li > a i {
         padding: 0; }
     [data-sidebar-style="full"][data-layout="vertical"] .menu-toggle .deznav .metismenu > li.mm-active > a {
-      background: #2f4cdd;
+      background: #FF9800;
       border-radius: 0.375rem;
       color: #fff; }
       [data-sidebar-style="full"][data-layout="vertical"] .menu-toggle .deznav .metismenu > li.mm-active > a i {
@@ -12086,10 +12086,10 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
       top: auto; }
     [data-sidebar-style="full"][data-layout="vertical"] .menu-toggle .deznav .metismenu > li:hover > a {
       border-radius: 0.375rem;
-      background: #2f4cdd;
+      background: #FF9800;
       color: #fff; }
       [data-theme-version="dark"][data-sidebar-style="full"][data-layout="vertical"] .menu-toggle .deznav .metismenu > li:hover > a {
-        background: #1e2746; }
+        background: #FF9800; }
       [data-sidebar-style="full"][data-layout="vertical"] .menu-toggle .deznav .metismenu > li:hover > a i {
         color: #fff; }
     [data-sidebar-style="full"][data-layout="vertical"] .menu-toggle .deznav .metismenu > li:hover > ul {
@@ -15553,7 +15553,7 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
 [data-primary="color_2"] .single-mail.active {
   background: #143b64; }
 [data-primary="color_2"] .profile-info h4.text-primary {
-  color: #143b64 !important; }
+  color: #FF9800 !important; }
 [data-primary="color_2"] .profile-tab .nav-item .nav-link:hover, [data-primary="color_2"] .profile-tab .nav-item .nav-link.active {
   border-bottom: 0.2px solid #143b64;
   color: #143b64; }

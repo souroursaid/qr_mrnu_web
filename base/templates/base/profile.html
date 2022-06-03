@@ -5,23 +5,10 @@
 
         <div class="content-body">
             <div class="container-fluid">
-                <div class="row page-titles mx-0">
-                    <div class="col-sm-6 p-md-0">
-                        <div class="welcome-text">
-                            <h4>Hi, welcome back!</h4>
-                            <p class="mb-0">Your business dashboard template</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0)">App</a></li>
-                            <li class="breadcrumb-item active"><a href="javascript:void(0)">Profile</a></li>
-                        </ol>
-                    </div>
-                </div>
+            
                 <!-- row -->
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-lg-8">
                         <div class="profile card card-body px-3 pt-3 pb-0">
                             <div class="profile-head">
                                 <div class="custom-tab-1">
@@ -37,24 +24,10 @@
                                         <div id="profile-settings" class="tab-pane fade active show">
                                             <div class="card-body">
                                                 <div class="settings-form">
-                                                    <h4 class="text-primary">General Setting</h4>
-                                                    <form>
-                                                            <div class="form-group col-md-6">
-                                                                <label>Name</label>
-                                                                <input type="text" placeholder="Name" class="form-control">
-                                                            </div>
-                                                            <div class="form-group col-md-6">
-                                                                <label>Phone Number</label>
-                                                                <input type="text" placeholder="Phone Number" class="form-control">
-                                                            </div>
-                                                        <div class="form-group col-md-6">
-                                                            <label>Email</label>
-                                                            <input type="text" placeholder="expample@gmail.com" class="form-control">
-                                                        </div>
-                                                        <div class="form-group col-md-6">
-                                                            <label>Picture</label>
-                                                            <input type="file"  class="form-control">
-                                                        </div>
+                                                  
+                                                    <form action="" method="post" enctype="multipart/form-data">
+                                                        {% csrf_token %}
+                                                        {{ form.as_p }}
                                                         <button class="btn btn-primary" type="submit">Sign in</button>
                                                      </form>
                                                 </div>
@@ -64,8 +37,8 @@
                                             <div class="card-body">
                                                 <!-- Nav tabs -->
                                                 <div class="settings-form">
-                                                    <h4 class="text-primary">Change Password</h4>
-                                                    <form>
+                                                 
+                                                    <form action="" method="post">
                                                         <div class="form-group col-md-6">
                                                             <label>Old Password</label>
                                                             <input type="text"  class="form-control">

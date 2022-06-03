@@ -110,7 +110,16 @@ def home(request):
 
 @login_required(login_url='login')
 def profile(request):
-    return render(request, 'base/profile.html')
+    manager = request.user.manager
+    form = ManagerForm(instance=manager)
+
+    if request.method == 'POST':
+        form = ManagerForm(request.POST, request.FILES, instance=manager)
+        if form.is_valid():
+            form.save()
+
+    context = {'form': form}
+    return render(request, 'base/profile.html', context)
 
 
 @login_required(login_url='login')

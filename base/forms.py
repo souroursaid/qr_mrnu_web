@@ -71,6 +71,34 @@ class CategoryForm(ModelForm):
         fields = '__all__'
 
 
+class ManagerForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["name"].widget.attrs.update({
+            'required': '',
+            'name': 'name',
+            'class': 'form-control',
+        })
+        self.fields["phone"].widget.attrs.update({
+            'required': '',
+            'name': 'phone',
+            'class': 'form-control',
+        })
+        self.fields["image"].widget.attrs.update({
+            'class': 'form-control',
+        })
+        self.fields["email"].widget.attrs.update({
+            'required': '',
+            'name': 'email',
+            'class': 'form-control',
+        })
+
+    class Meta:
+        model = Manager
+        fields = '__all__'
+        exclude = ['user']
+
+
 class TableForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
