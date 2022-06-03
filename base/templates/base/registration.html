@@ -10,10 +10,33 @@
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png">
     <link href="{% static 'styles/style.css' %}" rel="stylesheet">
+<style>
+    .bg-img {
+  /* The image used */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url("{% static 'images/bg-hero.jpg' %}");
 
+  /* Control the height of the image */
+  min-height: 380px;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+.auth-form input:focus{
+    border: 1px solid;
+    border-color: #FF9800;
+  
+}
+.auth-form input{
+    color: black;
+}
+</style>
 </head>
 
 <body class="h-100">
+   <div class="bg-img">
     <div class="authincation h-100">
         <div class="container h-100">
             <div class="row justify-content-center h-100 align-items-center">
@@ -27,7 +50,7 @@
                 
                                     <form action="" method="post">
                                         {% csrf_token %}
-                                        <div class="form-group">
+                                        <div class="form-group ">
                                             <label class="mb-1"><strong>Username</strong></label>
                                             {{ form.username }}
                                         </div>
@@ -44,7 +67,7 @@
                                             {{ form.password2 }}
                                         </div>
                                         <div class="text-center mb-4">
-                                            <button type="submit" class="btn btn-primary btn-block">Sign me up</button>
+                                            <button type="submit" class="btn btn-block" style="background-color:#FF9800 ;color:white">Sign me up</button>
                                         </div>
                                     </form>
                                     
@@ -57,7 +80,7 @@
                                   {% endfor %}
 
                                     <div class="new-account mt-3">
-                                        <p>Already have an account? <a class="text-primary" href="{% url 'login' %}">Sign in</a></p>
+                                        <p>Already have an account? <a style="color: #FF9800;" href="{% url 'login' %}">Sign in</a></p>
                                     </div>
                                 </div>
                             </div>
@@ -67,7 +90,7 @@
             </div>
         </div>
     </div>
-
+</div>
 <!--**********************************
 	Scripts
 ***********************************-->
