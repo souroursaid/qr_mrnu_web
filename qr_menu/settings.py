@@ -69,6 +69,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+
 ROOT_URLCONF = 'qr_menu.urls'
 
 TEMPLATES = [
@@ -100,12 +101,12 @@ WSGI_APPLICATION = 'qr_menu.wsgi.application'
 
 DATABASES = {
     'default': {
-       'ENGINE': 'django.db.backends.postgresql',
-        	'NAME': 'qr_menu',
-        	'USER': 'postgres',
-        	'PASSWORD': 'sourour148',
-        	'HOST':'localhost',
-        	'PORT':'6000',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'qr_menu',
+                'USER': 'postgres',
+                'PASSWORD': 'sourour148',
+                'HOST': 'localhost',
+                'PORT': '6000',
     }
 }
 
@@ -157,3 +158,9 @@ MEDIA_ROOT = BASE_DIR / 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+EMAIL_HOST = 'smtp.mailtrap.io'
+EMAIL_HOST_USER = '299907fa887e22'
+EMAIL_HOST_PASSWORD = 'adae05574fa5ef'
+EMAIL_PORT = '2525'

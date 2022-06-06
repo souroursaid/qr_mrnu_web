@@ -109,10 +109,9 @@ def home(request):
 
 
 @login_required(login_url='login')
-def profile(request):
-    manager = request.user
+def profileSetting(request):
+    manager = request.user.manager
     form = ManagerForm(instance=manager)
-
     if request.method == 'POST':
         form = ManagerForm(request.POST, request.FILES, instance=manager)
         if form.is_valid():
