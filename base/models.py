@@ -48,7 +48,6 @@ class Manager(models.Model):
         return self.name
 
 
-
 class Category(models.Model):
     name = models.CharField(max_length=200, null=True)
 
@@ -219,6 +218,8 @@ class Feedback(models.Model):
 
 
 class Restaurant(models.Model):
+    user = models.OneToOneField(
+        User, on_delete=models.CASCADE, null=True, blank=True)
     restaurant_name = models.CharField(max_length=200, null=True)
     email = models.EmailField(max_length=100, null=True)
     phone = models.CharField(max_length=200, null=True)

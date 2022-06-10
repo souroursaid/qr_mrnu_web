@@ -17,7 +17,7 @@ class CreateUserForm(UserCreationForm):
             'id': 'username',
             'type': 'text',
             'class': 'form-control',
-            'placeholder': 'type your username',
+            'placeholder': 'Enter your username',
             'maxlength': '16',
             'minlength': '6',
         })
@@ -27,7 +27,7 @@ class CreateUserForm(UserCreationForm):
             'id': 'email',
             'type': 'email',
             'class': 'form-control',
-            'placeholder': 'type your email',
+            'placeholder': 'Enter your email',
         })
 
         self.fields["password1"].widget.attrs.update({
@@ -36,7 +36,7 @@ class CreateUserForm(UserCreationForm):
             'id': 'password1',
             'type': 'password',
             'class': 'form-control',
-            'placeholder': 'type your password',
+            'placeholder': 'Enter your password',
             'maxlength': '22',
             'minlength': '8',
         })
@@ -46,7 +46,7 @@ class CreateUserForm(UserCreationForm):
             'id': 'password1',
             'type': 'password',
             'class': 'form-control',
-            'placeholder': 'type your password',
+            'placeholder': 'Enter your password',
             'maxlength': '22',
             'minlength': '8',
         })
