@@ -28,8 +28,11 @@
                             <table class="table table-responsive-md">
                                 <thead>
                                     <tr>
-                                        <th ><strong>Table</strong></th>
+                                        <th ><strong>R.N°</strong></th>
                                         <th><strong>Name</strong></th>
+                                        <th><strong>Number of People</strong></th>
+                                        <th><strong>Phone Number</strong></th>
+                                        <th><strong>Note</strong></th>
                                         <th><strong>Visit Time</strong></th>
                                         <th><strong>Actions</strong></th>
                                     </tr>
@@ -37,8 +40,11 @@
                                 <tbody>
                                     {% for reservation in reservations %}
                                     <tr>
-                                        <td><strong>{{ reservation.table }}</strong></td>
+                                        <td>{{ reservation.id }}</td>
                                         <td>{{ reservation.name }}</td>
+                                        <td>{{ reservation.phone_number }}</td>
+                                        <td>{{ reservation.number_people }}</td>
+                                        <td>{{ reservation.note }}</td>
                                         <td>{{ reservation.date_visit|date:"d-m-Y" }} <strong>{{ reservation.date_visit|date:"H:i" }}</strong></td>
                                         <td>
                                             <a type="button" class="btn light btn-info" href="{% url 'reservation_update' reservation.id %}" >Edit</a>
@@ -80,6 +86,9 @@
                 </div>
             </div>
         </div>
+
+
+
     </div>
 </div>
 

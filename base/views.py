@@ -22,7 +22,7 @@ from datetime import timedelta
 from django.conf import settings
 from qrcode import *
 import random
-
+from .utils import *
 # Create your views here.
 
 
@@ -47,6 +47,8 @@ def registrationPage(request):
 
 @unauthenticated_user
 def loginPage(request):
+
+    data = User.objects.all().filter(id=request.user.id)
     users_in_group = Group.objects.get(name="waitstaff").user_set.all()
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -54,7 +56,8 @@ def loginPage(request):
 
         user = authenticate(request, username=username, password=password)
 
-        if user in users_in_group:
+        if is_manager(request.user):
+            data = Manager.objects.all().filter(id=request.user.manager.id)
             if user is not None:
                 login(request, user)
                 return redirect('/')
@@ -94,7 +97,7 @@ def home(request):
     data.append(restaurant)
     data.append(delivery)
 
-    item = Customer.objects.all().values()
+    item = User.objects.all().values()
     df = pd.DataFrame(item)
     df = df['id'].tolist()
 
@@ -110,12 +113,20 @@ def home(request):
 
 @login_required(login_url='login')
 def profileSetting(request):
-    manager = request.user.manager
-    form = ManagerForm(instance=manager)
-    if request.method == 'POST':
-        form = ManagerForm(request.POST, request.FILES, instance=manager)
-        if form.is_valid():
-            form.save()
+    if request.user.is_staff:
+        manager = request.user.manager
+        form = ManagerForm(instance=manager)
+        if request.method == 'POST':
+            form = ManagerForm(request.POST, request.FILES, instance=manager)
+            if form.is_valid():
+                form.save()
+    else:
+        user = request.user
+        form = UserForm(instance=user)
+        if request.method == 'POST':
+            form = UserForm(request.POST, request.FILES, instance=user)
+            if form.is_valid():
+                form.save()
 
     context = {'form': form}
     return render(request, 'base/profile.html', context)
@@ -599,12 +610,14 @@ def call_waiter(request):
     return render(request, 'base/call_waiter.html', context)
 
 
+@login_required(login_url='login')
 def restaurant(request):
     restaurant = Restaurant.objects.last()
     context = {'restaurant': restaurant}
     return render(request, 'base/restaurant.html', context)
 
 
+@login_required(login_url='login')
 def CreateRestaurant(request):
     form = RestaurantForm()
     if request.method == 'POST':
@@ -620,6 +633,7 @@ def CreateRestaurant(request):
     return render(request, 'base/forms/restaurant_form.html', context)
 
 
+@login_required(login_url='login')
 def Restaurantdelete(request, pk):
     restaurant = Restaurant.objects.get(id=pk)
     if request.method == 'POST':
@@ -632,6 +646,7 @@ def Restaurantdelete(request, pk):
     return render(request, 'base/forms/delete_restaurant.html', context)
 
 
+@login_required(login_url='login')
 def updateRestaurant(request, pk):
     restaurant = Restaurant.objects.get(id=pk)
     form = RestaurantForm(instance=restaurant)
@@ -665,6 +680,7 @@ def qr_share(request):
     return render(request, 'base/qr_share.html', context)
 
 
+@login_required(login_url='login')
 def callWaiterDelete(request, pk):
     call = Call_waiter.objects.get(id=pk)
     if request.method == 'POST':
@@ -677,12 +693,14 @@ def callWaiterDelete(request, pk):
     return render(request, 'base/forms/delete_call.html', context)
 
 
+@login_required(login_url='login')
 def staff(request):
     staffs = User.objects.filter(groups__name='waitstaff')
     context = {'staffs': staffs}
     return render(request, 'base/staff.html', context)
 
 
+@login_required(login_url='login')
 def createStaff(request):
 
     form = StaffForm()
@@ -709,8 +727,29 @@ def deleteStaff(request, pk):
     if request.method == 'POST':
         staff.delete()
         messages.success(
-            request, 'Your menu item was deleted successfully!', extra_tags='alert')
+            request, 'Your staff was deleted successfully!', extra_tags='alert')
         return redirect('staff')
 
-    context = {'item': staff}
+    context = {'staff': staff}
     return render(request, 'base/forms/delete_staff.html', context)
+
+
+# @login_required(login_url='login')
+# def adminProfile(request):
+
+#     user = request.user
+#     form = AdminForm(instance=user)
+#     if request.method == 'POST':
+#         form = AdminForm(request.POST, request.FILES, instance=user)
+#         if form.is_valid():
+#             form.save()
+
+#     context = {'form': form}
+#     return render(request, 'base/admin_profile.html', context)
+
+
+@login_required(login_url='login')
+def restaurants(request):
+    restaurant = Restaurant.objects.all()
+    context = {'restaurant': restaurant}
+    return render(request, 'base/resto.html', context)

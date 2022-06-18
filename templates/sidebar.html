@@ -11,19 +11,20 @@
     <div class="deznav-scroll">
         
         <ul class="metismenu" id="menu">
-            
             <li><a href="{% url 'dashboard' %}" class=" ai-icon" aria-expanded="false">
                 <i class="fi fi-rr-database"></i>
 
                     <span class="nav-text">Dashboard</span>
                 </a>
             </li>
+            
             <li><a class="ai-icon" href="{% url 'order' %}">
                 <i class="fi fi-rr-shopping-bag"></i>
                     <span class="nav-text">Orders</span>
                 </a>
 
             </li>
+            
             <li><a href="{% url 'call_waiter' %}" class="ai-icon"  aria-expanded="false">
 
                 <i class="fi fi-rr-phone-call"></i>
@@ -31,6 +32,7 @@
                 </a>
             </li>
             {% if request.user.is_staff %}
+
             <li><a href="{% url 'category' %}" class="ai-icon"  aria-expanded="false">
 
                 <i class="fi fi-rr-apps-add"></i>
@@ -54,7 +56,7 @@
             </li>
             {% endif %}
 
-            
+       
             <li><a href="{% url 'reservation' %}" class="ai-icon" aria-expanded="false">
                 <i class="fi fi-rr-calendar"></i>
                     <span class="nav-text">Reservations</span>
@@ -66,28 +68,28 @@
                     <span class="nav-text">Waitstaff</span>
                 </a>
             </li>
-            {% endif %}
+         
         
             <li><a href="{% url 'qr_share' %}" class="ai-icon" aria-expanded="false">
                 <i class="fa fa-qrcode"></i>
                     <span class="nav-text">QR Share</span>
                 </a>
             </li>
-            {% if request.user.is_staff %}
+          
             <li><a href="{% url 'restaurant' %}" class="ai-icon"  aria-expanded="false">
                 <i class="fi fi-rr-marker"></i>
                     <span class="nav-text">Restaurant Contact</span>
                 </a>
             </li>
-            {% endif %}
-            {% if request.user.is_staff %}
+           
+           
             <li><a href="{% url 'feedback' %}" class="ai-icon"  aria-expanded="false">
                 <i class="fi fi-rr-comment-alt"></i>
                     <span class="nav-text">Feedbacks</span>
                 </a>
             </li>
             {% endif %}
-
+       
            
         </ul>
     </div>

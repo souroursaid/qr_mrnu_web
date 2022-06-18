@@ -1,0 +1,56 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+
+        <div class="content-body">
+            <div class="container-fluid">
+               
+                <!-- row -->
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="profile card card-body px-3 pt-3 pb-0">
+                            <div class="profile-head">
+                                <div class="custom-tab-1">
+                                    <ul class="nav nav-tabs">
+
+                                        <li class="nav-item"><a href="#profile-settings" data-toggle="tab" class="nav-link">General Setting</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content">
+
+                                        <div id="profile-settings" class="tab-pane fade active show">
+                                            <div class="card-body">
+                                                <div class="settings-form">
+                                                  
+                                                    <form action="" method="post" enctype="multipart/form-data">
+                                                        {% csrf_token %}
+                                                        <div class="col-md-12">
+                                                            <label class="control-label">Username </label>
+                                                            {{ form.username}}
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <label class="control-label">Email </label>
+                                                            {{ form.email}}
+                                                        </div>
+                                                        
+                                                        <div class="m-2">
+                                                            <span> You can change the password using <a href="{% url 'password_change' %}" style="color: #ff7024;" > this form </a>.</span> <br>
+                                                        </div>
+                                                        <div class="text-center">
+                                                            <button class="btn" style="background-color: #ff7024;color:white;" type="submit">Submit</button>
+                                                        </div>
+                                                     </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+{% endblock content %}

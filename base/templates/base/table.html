@@ -20,7 +20,7 @@
             <div class="card">
 
 
-                <div class="card-header  mt-5">
+                <div class="card-header">
                     <h4 class="card-title">Table Management</h4>
                     
                     <div>
@@ -48,7 +48,6 @@
                                 <td><strong >Table- {{ table.table_Number }}</strong></td>
                                 <td>{{ table.size }}</td>
                                 <td>
-                                    <button type="button" class="btn light btn-success" data-toggle="modal" data-target="#qr">QR Code</button>
                                     <a type="button" class="btn light btn-info" href="{% url 'table_update' table.id %}" >Edit</a>
                                     <a type="button" class="btn light btn-danger"  href="{% url 'table_delete' table.id %} ">Delete</a> 
                                 </td>

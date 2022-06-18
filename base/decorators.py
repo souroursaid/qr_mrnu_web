@@ -25,3 +25,5 @@ def allowed_users(allowed_roles=[]):
             return view_func(request, *args, **kwargs)
         return wrapper_func
     return decorator
+
+

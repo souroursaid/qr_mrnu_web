@@ -7,10 +7,13 @@ urlpatterns = [
 
     path('', views.home, name="dashboard"),
     path('login/', views.loginPage, name="login"),
+     path('login_account/', views.loginPage, name="login_account"),
     path('logout/', views.logoutPage, name="logout"),
     path('registration/', views.registrationPage, name="registration"),
     path('profile/', views.profileSetting, name="profile"),
+#     path('admin_profile/', views.adminProfile, name="admin_profile"),
 
+     path('restaurants/', views.restaurants, name="restaurants"),
     # Categories Management
     path('category/', views.category, name="category"),
     path('category_create/', views.createCategory, name="category_create"),
@@ -80,6 +83,8 @@ urlpatterns = [
     # staff Management
     path('staff/', views.staff, name="staff"),
     path('staff_create/', views.createStaff, name="staff_create"),
+    path('staff_delete/<str:pk>/',
+         views.deleteStaff, name="staff_delete"),
 
     # password Management
     path('reset_password/', auth_views.PasswordResetView.as_view(

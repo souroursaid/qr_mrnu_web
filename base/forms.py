@@ -57,6 +57,35 @@ class CreateUserForm(UserCreationForm):
         fields = ['username', 'email', 'password1', 'password2']
 
 
+class AdminForm(UserCreationForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["username"].widget.attrs.update({
+            'required': '',
+            'name': 'username',
+            'id': 'username',
+            'type': 'text',
+            'class': 'form-control',
+            'placeholder': 'Enter your username',
+            'maxlength': '16',
+            'minlength': '6',
+        })
+        self.fields["email"].widget.attrs.update({
+            'required': '',
+            'name': 'email',
+            'id': 'email',
+            'type': 'email',
+            'class': 'form-control',
+            'placeholder': 'Enter your email',
+        })
+
+    class Meta:
+
+        model = User
+        fields = ['username', 'email', ]
+
+
 class CategoryForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -211,10 +240,43 @@ class OrderItemForm(ModelForm):
 
 
 class ReservationForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["name"].widget.attrs.update({
+            'required': '',
+            'name': 'name',
+            'class': 'form-control',
+        })
+        self.fields["number_people"].widget.attrs.update({
+            'required': '',
+            'name': 'number_people',
+            'type': 'number',
+            'class': 'form-control',
+        })
+        self.fields["phone_number"].widget.attrs.update({
+            'required': '',
+            'name': 'phone_number',
+            'type': 'number',
+            'class': 'form-control',
+        })
+        self.fields["note"].widget.attrs.update({
+            'required': '',
+            'name': 'note',
+            'type': 'text',
+            'class': 'form-control',
+        })
+        self.fields["date_visit"].widget.attrs.update({
+            'required': '',
+            'name': 'date_visit',
+            'type': 'text',
+            'class': 'form-control',
+            'id': "date-format"
+        })
 
     class Meta:
         model = Reservation
         fields = '__all__'
+        exclude = ['table']
 
 
 class RestaurantForm(ModelForm):
@@ -300,3 +362,25 @@ class StaffForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2']
+
+
+class UserForm(UserCreationForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["username"].widget.attrs.update({
+            'required': '',
+            'name': 'username',
+            'class': 'form-control',
+        })
+
+        self.fields["email"].widget.attrs.update({
+            'required': '',
+            'name': 'email',
+            'class': 'form-control',
+        })
+
+    class Meta:
+
+        model = User
+        fields = ['username', 'email']
