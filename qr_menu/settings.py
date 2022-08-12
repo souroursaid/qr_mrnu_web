@@ -30,7 +30,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-4bae5!5=yaf$^!wn18kucs2jflc%1$-$inuehq^-&(i4=++2_q'
+SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -102,9 +102,9 @@ WSGI_APPLICATION = 'qr_menu.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'my_qr_menu',
-                'USER': 'postgres',
-                'PASSWORD': 'sourour148',
+        'NAME': '',
+                'USER': '',
+                'PASSWORD': '',
                 'HOST': 'localhost',
                 'PORT': '6000',
     }
